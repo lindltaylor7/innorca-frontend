@@ -4,27 +4,27 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _219f5a64 = () => interopDefault(import('..\\pages\\atencion-al-cliente\\index.vue' /* webpackChunkName: "pages/atencion-al-cliente/index" */))
-const _130a9cbc = () => interopDefault(import('..\\pages\\construcciones\\index.vue' /* webpackChunkName: "pages/construcciones/index" */))
-const _863e3032 = () => interopDefault(import('..\\pages\\inicio\\index.vue' /* webpackChunkName: "pages/inicio/index" */))
-const _1f6ae31f = () => interopDefault(import('..\\pages\\login\\index.vue' /* webpackChunkName: "pages/login/index" */))
-const _62656beb = () => interopDefault(import('..\\pages\\mi-perfil\\index.vue' /* webpackChunkName: "pages/mi-perfil/index" */))
-const _57a4b8ee = () => interopDefault(import('..\\pages\\mis-inmuebles\\index.vue' /* webpackChunkName: "pages/mis-inmuebles/index" */))
-const _6e5216a4 = () => interopDefault(import('..\\pages\\mis-pagos\\index.vue' /* webpackChunkName: "pages/mis-pagos/index" */))
-const _0254e3bf = () => interopDefault(import('..\\pages\\mis-referidos\\index.vue' /* webpackChunkName: "pages/mis-referidos/index" */))
-const _df34a3c4 = () => interopDefault(import('..\\pages\\noticias\\index.vue' /* webpackChunkName: "pages/noticias/index" */))
-const _4397e8ba = () => interopDefault(import('..\\pages\\preguntas-frecuentes\\index.vue' /* webpackChunkName: "pages/preguntas-frecuentes/index" */))
-const _0cc7c8c2 = () => interopDefault(import('..\\pages\\recuperar-contrasena\\index.vue' /* webpackChunkName: "pages/recuperar-contrasena/index" */))
-const _9b5df158 = () => interopDefault(import('..\\pages\\signup\\index.vue' /* webpackChunkName: "pages/signup/index" */))
-const _59d47282 = () => interopDefault(import('..\\pages\\atencion-al-cliente\\modal.vue' /* webpackChunkName: "pages/atencion-al-cliente/modal" */))
-const _a35fda2a = () => interopDefault(import('..\\pages\\construcciones\\nueva-cotizacion\\index.vue' /* webpackChunkName: "pages/construcciones/nueva-cotizacion/index" */))
-const _2bc04e1a = () => interopDefault(import('..\\pages\\mi-perfil\\cambio-contrasena.vue' /* webpackChunkName: "pages/mi-perfil/cambio-contrasena" */))
-const _3d70a1fe = () => interopDefault(import('..\\pages\\atencion-al-cliente\\detalle\\_id.vue' /* webpackChunkName: "pages/atencion-al-cliente/detalle/_id" */))
-const _2c1a3292 = () => interopDefault(import('..\\pages\\construcciones\\cotizacion\\_id.vue' /* webpackChunkName: "pages/construcciones/cotizacion/_id" */))
-const _bf4d2e34 = () => interopDefault(import('..\\pages\\noticias\\post\\_id.vue' /* webpackChunkName: "pages/noticias/post/_id" */))
-const _7a943568 = () => interopDefault(import('..\\pages\\recuperar-contrasena\\generar\\_id.vue' /* webpackChunkName: "pages/recuperar-contrasena/generar/_id" */))
-const _26e94311 = () => interopDefault(import('..\\pages\\completar-registro\\_id.vue' /* webpackChunkName: "pages/completar-registro/_id" */))
-const _06fc54ec = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _81448598 = () => interopDefault(import('..\\pages\\atencion-al-cliente\\index.vue' /* webpackChunkName: "pages/atencion-al-cliente/index" */))
+const _6fedb7ec = () => interopDefault(import('..\\pages\\construcciones\\index.vue' /* webpackChunkName: "pages/construcciones/index" */))
+const _4d2b99d2 = () => interopDefault(import('..\\pages\\inicio\\index.vue' /* webpackChunkName: "pages/inicio/index" */))
+const _d8191c22 = () => interopDefault(import('..\\pages\\login\\index.vue' /* webpackChunkName: "pages/login/index" */))
+const _2f6a12bb = () => interopDefault(import('..\\pages\\mi-perfil\\index.vue' /* webpackChunkName: "pages/mi-perfil/index" */))
+const _315977be = () => interopDefault(import('..\\pages\\mis-inmuebles\\index.vue' /* webpackChunkName: "pages/mis-inmuebles/index" */))
+const _3b56bd74 = () => interopDefault(import('..\\pages\\mis-pagos\\index.vue' /* webpackChunkName: "pages/mis-pagos/index" */))
+const _47ecbae2 = () => interopDefault(import('..\\pages\\mis-referidos\\index.vue' /* webpackChunkName: "pages/mis-referidos/index" */))
+const _a06e2564 = () => interopDefault(import('..\\pages\\noticias\\index.vue' /* webpackChunkName: "pages/noticias/index" */))
+const _5da5dfea = () => interopDefault(import('..\\pages\\preguntas-frecuentes\\index.vue' /* webpackChunkName: "pages/preguntas-frecuentes/index" */))
+const _26d5bff2 = () => interopDefault(import('..\\pages\\recuperar-contrasena\\index.vue' /* webpackChunkName: "pages/recuperar-contrasena/index" */))
+const _624b5af8 = () => interopDefault(import('..\\pages\\signup\\index.vue' /* webpackChunkName: "pages/signup/index" */))
+const _70d4298f = () => interopDefault(import('..\\pages\\atencion-al-cliente\\modal.vue' /* webpackChunkName: "pages/atencion-al-cliente/modal" */))
+const _40b4c21b = () => interopDefault(import('..\\pages\\construcciones\\nueva-cotizacion\\index.vue' /* webpackChunkName: "pages/construcciones/nueva-cotizacion/index" */))
+const _11d0c7c3 = () => interopDefault(import('..\\pages\\mi-perfil\\cambio-contrasena.vue' /* webpackChunkName: "pages/mi-perfil/cambio-contrasena" */))
+const _e828fb9e = () => interopDefault(import('..\\pages\\atencion-al-cliente\\detalle\\_id.vue' /* webpackChunkName: "pages/atencion-al-cliente/detalle/_id" */))
+const _5e5c7432 = () => interopDefault(import('..\\pages\\construcciones\\cotizacion\\_id.vue' /* webpackChunkName: "pages/construcciones/cotizacion/_id" */))
+const _5eacdfd4 = () => interopDefault(import('..\\pages\\noticias\\post\\_id.vue' /* webpackChunkName: "pages/noticias/post/_id" */))
+const _6c8c781c = () => interopDefault(import('..\\pages\\recuperar-contrasena\\generar\\_id.vue' /* webpackChunkName: "pages/recuperar-contrasena/generar/_id" */))
+const _511b5b7e = () => interopDefault(import('..\\pages\\completar-registro\\_id.vue' /* webpackChunkName: "pages/completar-registro/_id" */))
+const _445bd01c = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -39,87 +39,87 @@ export const routerOptions = {
 
   routes: [{
     path: "/atencion-al-cliente",
-    component: _219f5a64,
+    component: _81448598,
     name: "atencion-al-cliente"
   }, {
     path: "/construcciones",
-    component: _130a9cbc,
+    component: _6fedb7ec,
     name: "construcciones"
   }, {
     path: "/inicio",
-    component: _863e3032,
+    component: _4d2b99d2,
     name: "inicio"
   }, {
     path: "/login",
-    component: _1f6ae31f,
+    component: _d8191c22,
     name: "login"
   }, {
     path: "/mi-perfil",
-    component: _62656beb,
+    component: _2f6a12bb,
     name: "mi-perfil"
   }, {
     path: "/mis-inmuebles",
-    component: _57a4b8ee,
+    component: _315977be,
     name: "mis-inmuebles"
   }, {
     path: "/mis-pagos",
-    component: _6e5216a4,
+    component: _3b56bd74,
     name: "mis-pagos"
   }, {
     path: "/mis-referidos",
-    component: _0254e3bf,
+    component: _47ecbae2,
     name: "mis-referidos"
   }, {
     path: "/noticias",
-    component: _df34a3c4,
+    component: _a06e2564,
     name: "noticias"
   }, {
     path: "/preguntas-frecuentes",
-    component: _4397e8ba,
+    component: _5da5dfea,
     name: "preguntas-frecuentes"
   }, {
     path: "/recuperar-contrasena",
-    component: _0cc7c8c2,
+    component: _26d5bff2,
     name: "recuperar-contrasena"
   }, {
     path: "/signup",
-    component: _9b5df158,
+    component: _624b5af8,
     name: "signup"
   }, {
     path: "/atencion-al-cliente/modal",
-    component: _59d47282,
+    component: _70d4298f,
     name: "atencion-al-cliente-modal"
   }, {
     path: "/construcciones/nueva-cotizacion",
-    component: _a35fda2a,
+    component: _40b4c21b,
     name: "construcciones-nueva-cotizacion"
   }, {
     path: "/mi-perfil/cambio-contrasena",
-    component: _2bc04e1a,
+    component: _11d0c7c3,
     name: "mi-perfil-cambio-contrasena"
   }, {
     path: "/atencion-al-cliente/detalle/:id?",
-    component: _3d70a1fe,
+    component: _e828fb9e,
     name: "atencion-al-cliente-detalle-id"
   }, {
     path: "/construcciones/cotizacion/:id?",
-    component: _2c1a3292,
+    component: _5e5c7432,
     name: "construcciones-cotizacion-id"
   }, {
     path: "/noticias/post/:id?",
-    component: _bf4d2e34,
+    component: _5eacdfd4,
     name: "noticias-post-id"
   }, {
     path: "/recuperar-contrasena/generar/:id",
-    component: _7a943568,
+    component: _6c8c781c,
     name: "recuperar-contrasena-generar-id"
   }, {
     path: "/completar-registro/:id?",
-    component: _26e94311,
+    component: _511b5b7e,
     name: "completar-registro-id"
   }, {
     path: "/",
-    component: _06fc54ec,
+    component: _445bd01c,
     name: "index"
   }],
 
