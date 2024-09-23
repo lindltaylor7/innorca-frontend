@@ -1,0 +1,205 @@
+#register {
+
+    .img-j {
+        border-radius: 20px;
+    }
+
+    .box {
+        border-radius: 20px;
+        width: 100%;
+        height: 100%;
+        background-color: $light-green;
+        color: #686868;
+        padding: 45px 0;
+
+        .wrap {
+            max-width: 580px;
+            margin: auto;
+        }
+
+        .title {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 32px;
+            color: $green;
+            margin-bottom: 22px;
+        }
+
+        .info {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            color: #686868;
+            margin-bottom: 10px;
+        }
+
+        .terms {
+            font-size: 12px;
+            line-height: 16px;
+            margin-bottom: 6px;
+        }
+
+        .login {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .obfuscate-s {
+            padding-left: 20px;
+            font-weight: 600;
+            margin: 20px 0 30px;
+        }
+
+        .help {
+            font-size: 12px;
+            line-height: 16px;
+            margin-bottom: 6px;
+        }
+    }
+
+    .modal-form {
+
+        span {
+            &.error {
+                display: block;
+                color: $red;
+                font-family: "Poppins";
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 20px;
+                padding-top: 0;
+                padding-bottom: 20px;
+                margin-top: -8px;
+            }
+        }
+
+        input {
+            &.error {
+                border: solid 1px #f4851f;
+            }
+        }
+
+        select {
+            text-transform: capitalize;
+
+            &.error {
+                border: solid 1px #f4851f;
+            }
+        }
+
+        textarea {
+            &.error {
+                border: solid 1px #f4851f;
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+#register-completar-registro {
+    .img-j {
+        border-radius: 20px;
+    }
+
+    .box {
+        border-radius: 20px;
+        width: 100%;
+        height: 100%;
+        background-color: $light-green;
+        color: #686868;
+        padding: 45px 0;
+
+        .wrap {
+            max-width: 580px;
+            margin: auto;
+        }
+
+        .title {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 32px;
+            color: $green;
+            margin-bottom: 22px;
+        }
+
+        .info {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            color: #686868;
+            margin-bottom: 10px;
+        }
+
+        .terms {
+            font-size: 12px;
+            line-height: 16px;
+            margin-bottom: 6px;
+        }
+
+        .login {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .obfuscate-s {
+            padding-left: 20px;
+            font-weight: 600;
+            margin: 20px 0 30px;
+        }
+
+        .help {
+            font-size: 12px;
+            line-height: 16px;
+            margin-bottom: 6px;
+        }
+    }
+
+
+    .modal-form {
+
+        span {
+            &.error {
+                display: block;
+                color: #f4851f;
+                font-family: "Poppins";
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 20px;
+                padding-top: 0;
+                padding-bottom: 20px;
+                margin-top: -8px;
+            }
+        }
+
+        input {
+            &.error {
+                border: solid 1px #f4851f;
+            }
+        }
+
+        select {
+            text-transform: capitalize;
+
+            &.error {
+                border: solid 1px #f4851f;
+            }
+        }
+
+        textarea {
+            &.error {
+                border: solid 1px #f4851f;
+                margin-top: 0;
+            }
+        }
+    }
+}

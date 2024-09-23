@@ -1,0 +1,91 @@
+aside.left-sidebar
+  .scroll-sidebar
+    nav.sidebar-nav
+      ul#sidebarnav
+        if (user)
+          li.sidebar-item.d-flex.align-items-center
+            a.btn.btn-success.btn-menorca.mr-1.ml-1.hide-menu(href='https://menorca.pe' style=" width:100%;padding: 0.5 1rem; font-size: 1rem; font-weight: 500;" target='_blank')
+              strong Visita la web Menorca
+        li.sidebar-item
+          a.sidebar-link.waves-effect.waves-dark.sidebar-link(href='/' aria-expanded='false' class=title!=undefined?(title=="Login"?"active":''):'')
+            img.ml-1.mr-1(src="/images/icons/sidebar/inicio.svg",style="height:1.2rem" alt="")
+            if(user) 
+              span.hide-menu Mis Datos
+            else
+              span.hide-menu Inicio
+        if user
+          if user.type == 1
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/noticias' class=title!=undefined?(title=="noticias"?"active":''):'' )
+                img.ml-1.mr-1(src="/images/icons/sidebar/novedades.svg",style="height:1.2rem" alt="")
+                span.hide-menu  Novedades
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/consultas' class=title!=undefined?(title=="solicitudes"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/solicitudes.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Mis consultas
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/inmuebles' class=title!=undefined?(title=="inmuebles"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/inmuebles.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Mis inmuebles
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/reciente-pago-pendiente' class=title!=undefined?(title=="reciente-pago-pendiente"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/pago.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Pago más cercano
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/cotizaciones' class=title!=undefined?(title=="cotizador"?"active":''):'' )
+                img.ml-1.mr-1(src="/images/icons/sidebar/cotizador.svg",style="height:1.2rem" alt="")
+                span.hide-menu  Mis construcciones
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/referidos' class=title!=undefined?(title=="referidos"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/referidos.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Mis referidos
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/preguntas-frecuentes' class=title!=undefined?(title=="Preguntas Frecuentes"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/preguntas.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Preguntas frecuentes
+          if user.type === 0
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/admin/tipo-cambio' class=title!=undefined?(title=="tipo-cambio"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/solicitudes.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Tipo de cambio
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/admin/noticias' class=title!=undefined?(title=="admin-noticias"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/novedades.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Ver novedades
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/admin/usuarios' class=title!=undefined?(title=="admin-usuarios"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/referir.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Ver usuarios
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/admin/consultas' class=title!=undefined?(title=="admin-solicitudes"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/solicitudes.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Ver consultas
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/admin/referencias' class=title!=undefined?(title=="admin-referencias"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/referidos.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Ver referidos
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/metricas/general' class=title!=undefined?(title=="admin-metricas"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/portafolio.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Ver métricas
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/admin/preguntas-frecuentes' class=title!=undefined?(title=="Preguntas Frecuentes"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/preguntas.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Preguntas frecuentes
+          if user.type == 2
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/admin/materiales' class=title!=undefined?(title=="admin-materiales"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/portafolio.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Ver materiales
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/admin/cotizaciones' class=title!=undefined?(title=="admin-cotizaciones"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/cotizador.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Ver cotizaciones
+            li.sidebar-item
+              a.sidebar-link.waves-effect.waves-dark(href='/preguntas-frecuentes' class=title!=undefined?(title=="Preguntas Frecuentes"?"active":''):'')
+                img.ml-1.mr-1(src="/images/icons/sidebar/preguntas.svg",style="height:1.2rem", alt="")
+                span.hide-menu  Preguntas frecuentes
+      if (pub)
+        div(style='height: 600px ;width:auto; border-radius:25px;overflow:hidden' align="center")
+          a.sidebar-item(href=pub.link target="_blank").hide-menu 
+            img.comercial-menorca(src=pub.image)

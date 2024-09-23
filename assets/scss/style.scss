@@ -1,0 +1,49 @@
+@import "@/assets/scss/main.scss";
+@import "@/assets/scss/menu.scss";
+@import "@/assets/scss/landing.scss";
+@import "@/assets/scss/register.scss";
+@import "@/assets/scss/login.scss";
+@import "@/assets/scss/misdatos.scss";
+@import "@/assets/scss/mispagos.scss";
+@import "@/assets/scss/mispropiedades.scss";
+@import "@/assets/scss/misreferidos.scss";
+@import "@/assets/scss/misconstrucciones.scss";
+@import "@/assets/scss/preguntasfrecuentes.scss";
+@import "@/assets/scss/footer.scss";
+@import "@/assets/scss/cards.scss";
+@import "@/assets/scss/sidebar.scss";
+@import "@/assets/scss/accordion.scss";
+@import "@/assets/scss/atencionalcliente.scss";
+@import "@/assets/scss/miresumen.scss";
+@import "@/assets/scss/news.scss";
+@import "@/assets/scss/detalle.scss";
+
+
+
+
+.detalle-cotizacion {
+
+    &__column {
+        @include tablet {
+            display: block !important;
+            font-size: 11px !important;
+        }
+    }
+
+    // &.table__header {
+    //     display: grid !important;
+
+    //     >div {
+    //         font-size: 11px;
+    //     }
+    // }
+
+    // &.table__header,
+
+    &__row {
+        @include tablet {
+            grid-template-columns: minmax(30px, 1fr) minmax(150px, 4fr) 1fr 1fr 3fr 1fr !important;
+            align-items: center;
+        }
+    }
+}

@@ -1,0 +1,51 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid#admin-all-users
+      .row: .col-12: .row.justify-content-center: .col-12.col-sm-12.col-md-10.col-lg-8.col-xl-6: .card: .card-body
+        .card-title
+          h2.title-primary2 Detalles de Usuario
+        ul.list-group
+          li.list-group-item.bkg-primary.text-white Nombre
+          li.list-group-item #{userData.profile.name}
+          li.list-group-item.bkg-primary.text-white Tipo de Documento
+          li.list-group-item #{userData.profile.docType}
+          li.list-group-item.bkg-primary.text-white Número de Documento
+          li.list-group-item #{userData.profile.document}
+          if (userData.profile.mainTelephone)
+            li.list-group-item.bkg-primary.text-white Teléfono de Sperant
+            li.list-group-item #{userData.profile.mainTelephone}
+          if (userData.profile.sperantEmail)
+            li.list-group-item.bkg-primary.text-white Correo de Sperant
+            li.list-group-item #{userData.profile.sperantEmail}
+          if (userData.email)
+            li.list-group-item.bkg-primary.text-white Correo de Recuperación
+            li.list-group-item #{userData.email}
+          if (userData.profile.emailRecord.length > 0)
+            li.list-group-item.bkg-primary.text-white Lista de Correos
+            li.list-group-item
+              ul
+                each email in userData.profile.emailRecord
+                  li #{email}
+          if (user.profile.adddress)
+            li.list-group-item.bkg-primary.text-white Dirección actual
+            li.list-group-item #{userData.profile.adddress}
+          if (userData.profile.reference)
+            li.list-group-item.bkg-primary.text-white Referencia
+            li.list-group-item #{userData.profile.reference}
+          if (userData.profile.addressRecord.length > 0)
+            li.list-group-item.bkg-primary.text-white Lista de Direcciones
+            li.list-group-item
+              ul
+                each adddress in userData.profile.addressRecord
+                  li #{adddress}
+          if (userData.profile.secondaryTelephone)
+            li.list-group-item.bkg-primary.text-white Teléfono de Respaldo
+            li.list-group-item #{userData.profile.secondaryTelephone}
+          if (userData.profile.telephoneRecord.length > 0)
+            li.list-group-item.bkg-primary.text-white Lista de Teléfonos
+            li.list-group-item
+              ul
+                each telephone in userData.profile.telephoneRecord
+                  li #{telephone}

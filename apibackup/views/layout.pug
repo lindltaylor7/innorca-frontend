@@ -1,0 +1,108 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color' content='#4DA5F4')
+    meta(name='csrf-token', content=_csrf)
+    link(rel='icon' href='/images/favicon.ico')
+    title Menorca
+    meta(name='description' content="Ventana homepage. Accede a toda la información de tus inmuebles sin salir de tu casa, de una manera segura y accesible desde tu pc o celular.")
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='' src='https://www.googletagmanager.com/gtag/js?id=G-ZVVDWCV3RP')
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZVVDWCV3RP');
+    link(rel="stylesheet" type="text/css" href='/assets/libs/daterangepicker/daterangepicker.css')
+    //template
+    // Custom CS
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css')
+    link(href='/css/style.min.css' rel='stylesheet')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    script(src="https://www.google.com/recaptcha/api.js" async defer)
+    //template ends
+    link(rel='stylesheet' href='/css/login-signup.css')
+    link(rel='stylesheet' href='/css/angel-style.css')
+    link(rel='stylesheet' href='/css/template-refactor.css')
+    // Wpp Css
+    link(rel="stylesheet" href="/css/floating-wpp.css")
+
+body  
+  // ==============================================================
+  // Preloader - style you can find in spinners.css
+  // ==============================================================
+  .preloader
+    .lds-ripple
+      .lds-pos
+      .lds-pos  
+  // ==============================================================
+  // Main wrapper - style you can find in pages.scss
+  // ==============================================================
+  #main-wrapper
+    include partials/header
+    include partials/left-sidebar
+    include partials/flash
+    block content
+    
+    include partials/footer
+    
+    //template
+    script(src='/assets/libs/jquery/dist/jquery.min.js')
+    // Bootstrap tether Core JavaScript
+    script(src='/assets/libs/popper.js/dist/umd/popper.min.js')
+    script(src='/assets/libs/bootstrap/dist/js/bootstrap.min.js')
+    // apps
+    script(src='/js/scripts/app.min.js')
+    script(src='/js/scripts/app.init.js')
+    script(src='/js/scripts/app-style-switcher.js')
+    // slimscrollbar scrollbar JavaScript
+    script(src='/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')
+    script(src='/assets/extra-libs/sparkline/sparkline.js')
+    // Wave Effects
+    script(src='/js/scripts/waves.js')
+    // Menu sidebar
+    script(src='/js/scripts/sidebarmenu.js')
+    // Custom JavaScript
+    script(src='/js/scripts/custom.min.js')
+    //cloudinary
+    script(src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript")
+    script(src='/js/cloudinary.js')
+    //template ends
+    //Wpp js
+    script(type="text/javascript" src="/js/scripts/floating-wpp.js")
+    script(src='/js/main.js')
+    script(type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js")
+    script(type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/es.min.js")
+    script(src='https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js')
+    
+    //Include Date Range Picker
+    script(src='/assets/libs/daterangepicker/daterangepicker.js')
+    // Include Chart Js
+    script(src='/assets/libs/chart.js/dist/Chart.min.js')
+    // Vue Js
+    script(src='/js/vue.js')
+    if (user)
+      script.
+        window.watsonAssistantChatOptions = {
+            integrationID: "4d2a50f4-b8b1-43e5-b566-1f39880f0d51", // The ID of this integration.
+            region: "us-east", // The region your integration is hosted in.
+            serviceInstanceID: "98ebbc46-ed85-4148-8a67-3a04fd88f18c", // The ID of your service instance.
+            onLoad: function(instance) { instance.render(); }
+          };
+        setTimeout(function(){
+          const t=document.createElement('script');
+          t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+          document.head.appendChild(t);
+        });
+    //tiny
+    script(src="https://cdn.tiny.cloud/1/zo56hil6tmx2yboy362h2jlr95v96jnnmmjbpwnbflyk8vtv/tinymce/5/tinymce.min.js" referrerpolicy="origin")
+    script(src='/js/tiny.js')
+    script(src='https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js')

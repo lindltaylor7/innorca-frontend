@@ -1,0 +1,115 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid#admin-all-quotes
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Cotizaciones
+        .card-subtitle 
+          p.d-inline-block En esta sección podrá realizar cotizaciones de sus futuros proyectos.
+          hr
+          .row
+            .col-12.d-flex.align-items-center.justify-content-between
+              h4.text-muted
+                strong Filtros
+              a.btn.btn-primary.float-right(href=`/admin/cotizaciones/exportar`)
+                i.fas.fa-plus-circle
+                |  Exportar
+        .row
+          .col-xl-3.col-lg-6
+            strong.text-primary2(style="margin-right:1em") Fecha de creación
+            input.select2.form-control.border-primary2#reportrange
+          .col-xl-2.col-lg-6
+            strong.text-primary2 Mes de creación
+            select.select2.form-control.border-primary2#monthInput(name="select" @change=`getOtherQuotes($event, 'month')`)
+              option(value="nofilter" selected disabled hidden) Mes
+              option#noFilterMonth(value="nofilter") Sin filtro
+              option(:value=`m+1` v-for="m in months") {{momentMonth(m)}}
+          .col-xl-2.col-lg-6
+            strong.text-primary2 Comenzar proyecto
+            select.select2.form-control.border-primary2#startProjectInput(name="select" @change=`getOtherQuotes($event, 'startProject')`)
+              option(value="nofilter" selected disabled hidden) Estado
+              option#noFilterstartProject(value="nofilter") Sin filtro
+              option(value="true") Sí
+              option(value="false") No
+          .col-xl-2.col-lg-6
+            strong.text-primary2 Asesoría
+            select.select2.form-control.border-primary2#statusInput(name="select" @change=`getOtherQuotes($event, 'status')`)
+              option(value="nofilter" selected disabled hidden) Estado
+              option#noFilterStatus(value="nofilter") Sin filtro
+              option(value="true") Sí
+              option(value="false") No
+          .col-xl-3.col-lg-12.h-100.align-self-end.text-end.mt-2
+            button.btn.btn-primary(@click.prevent='clearFilters()') Limpiar filtros
+        hr.space.s
+        .row
+          .col-md-12
+            .card-box
+              h4
+                strong.pl-2 Gestionar cotizaciones
+              h4.float-right
+                strong Monto Total: S/{{amount? amount:0}}
+              .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-md-none
+                .col-auto.pl-1
+                  strong.text-primary.m-0 Ver más
+                .col-auto.pr-1
+                  img.ml-2(src="/images/arrow.png", width="25px", alt="")
+              .table-responsive.mt-4
+                table.table
+                  thead
+                    tr.bkg-primary.text-white
+                      th(scope='col') #
+                      th(scope='col') Tipo de construcción
+                      th(scope='col') Usuario
+                      th(scope='col') Documento
+                      th(scope='col') Correo electrónico 
+                      th(scope='col') Número de contacto
+                      th(scope='col') Origen
+                      th(scope='col') Fecha tentativa
+                      th(scope='col') Habitaciones
+                      th(scope='col') Costo final
+                      th(scope='col') Fecha
+                      th(scope='col') Asesoría
+                      th(scope='col') Comenzar proyecto
+                      th(scope='col') Lotes
+                  tbody
+                    //- tr.cursor-pointer(v-if='quotes !== null' v-for="(quote, index) in quotes" :key="index")
+                    tr.cursor-pointer(v-if='quotes !== null' v-for="(quote, index) in quotes" :key="index" @click.prevent='openQuote(quote._id)')
+                      td {{index+1}}
+                      td(v-if="quote.projectType") {{quote.projectType}}
+                      td(v-else) -
+                      td(v-if="quote.owner.profile.name") {{quote.owner.profile.name}}
+                      td(v-else) -
+                      td(v-if="quote.owner.profile.document") {{quote.owner.profile.document}}
+                      td(v-else) -
+                      td(v-if="quote.owner.profile.sperantEmail") {{quote.owner.profile.sperantEmail}}
+                      td(v-else-if="quote.owner.email") {{quote.owner.email}}
+                      td(v-else) -
+                      td(v-if="quote.owner.profile.main_telephone") {{quote.owner.profile.main_telephone}}
+                      td(v-else-if="quote.owner.profile.secondaryTelephone") {{quote.owner.profile.secondaryTelephone}}
+                      td(v-else) -
+                      td(v-if="quote.quoteType") {{quote.quoteType}}
+                      td(v-else) -
+                      td(v-if="quote.startDate") {{quote.startDate}}
+                      td(v-else) -
+                      td(v-if="quote.projects.length") {{quote.projects.length}}
+                      td(v-else)
+                      td(v-if="quote.totalCostNumber") S/{{formatMoney(quote.totalCostNumber)}}
+                      td(v-else) - -
+                      td(v-if="quote.createdAt") {{quote.createdAt}}
+                      td(v-else) -
+                      td(v-if="quote.counseling") {{quote.counseling?'Si':'No'}}
+                      td(v-else) No
+                      td(v-if="quote.startProject") {{quote.startProject?'Si':'No'}}
+                      td(v-else) No
+                      td(v-if="quote.addresses && quote.addresses.length>0") 
+                        span(v-for="(p, index) in quote.addresses") {{p}}
+                      td(v-else) -
+                .text-center(v-if="quotes.length===0 && filter!==null && !isProcessing") No se encontraron resultados
+                .text-center(v-if="isProcessing") Cargando ...    
+              .form-actions: .text-right
+                a.btn.btn-primary.back-btn(v-if="page > 1" @click.prevent=`getOtherQuotes($event, 'noType', 'false')`) Atrás
+                a.btn.btn-secondary.btn-primary.back-btn(v-else) Atrás
+                a.btn.btn-primary(v-if="total_pages > page" @click.prevent=`getOtherQuotes($event, 'noType', 'true')`) Ver más
+                a.btn.btn-secondary(v-else) Ver más

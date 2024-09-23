@@ -1,0 +1,98 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body: .row.justify-content-center
+        .col-md-5
+          form.mt-4
+            .col-12
+              .card-title
+                h2.text-primary2  Detalles del referidor
+            .col-12.mt-4
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | Nombre
+                .col-md-1
+                .col-md-7
+                  div #{referencer.profile.name}
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | DNI
+                .col-md-1
+                .col-md-7
+                  div #{referencer.profile.document}
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | Correo
+                .col-md-1
+                .col-md-7
+                  div #{referencer.email}
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | Teléfono
+                .col-md-1
+                .col-md-7
+                  div #{referencer.profile.mainTelephone}
+        .col-1
+          .h-100.bkg-primary2(style='width:1px')
+        .col-md-6
+          .mt-4
+            .card-title
+              h2.text-primary2 Detalles del referido
+            .col-12.mt-4
+              .form-group: .row
+                .col-md-4.text-white.bkg-primary2.border-primary2.mb-1.h-2rem
+                  .d-flex.align-items-center.h-100
+                    div Status
+                .col-md-1
+                .col-md-7.text-white.p-0
+                  - 
+                    const statusesObject = {
+                      pending                    : 'Pendiente',
+                      deposit_payment_created    : 'Depósito',
+                      deposit_financial_created  : 'Depósito',
+                      process_separation_created : 'Separación',
+                      process_sale_completed     : 'En proceso de venta',
+                      process_canceled_created   : 'Desistió',
+                      reserv_created             : 'Reserva',
+                      reserv_canceled            : 'Reserva',
+                    }
+                  div.select2.form-control.bkg-primary2.text-white #{ statusesObject[referred.sperantStatus] }
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | Nombre
+                .col-md-1
+                .col-md-7
+                  div #{referred.name}
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | DNI
+                .col-md-1
+                .col-md-7
+                  div #{referred.dni}
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | Correo
+                .col-md-1
+                .col-md-7
+                  div #{referred.email}
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | Teléfono
+                .col-md-1
+                .col-md-7
+                  div #{referred.phone}
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | Proyecto(s)
+                .col-md-1
+                .col-md-7
+                  each project in projects
+                    div #{project.name}
+              .form-group: .row
+                .col-md-4.text-primary2
+                  | Comentarios
+                .col-md-1
+                .col-md-7
+                  textarea.form-control.h-6rem(placeholder=`${referred.comments}` readOnly)

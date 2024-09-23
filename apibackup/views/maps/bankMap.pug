@@ -1,0 +1,13 @@
+extends ../mapLayout
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body
+        .card-title
+          .title-primary2 Bancos más cercanos
+        p.d-inline-block *En caso presente incovenientes para ubicar su localización exacta en el mapa desde una computadora, le reccomendamos pueda entrar a la web desde un dispositvo móvil.
+        hr
+        .row.justify-content-center
+          input(type='hidden' id='bank_name' value=`${bankname}`)
+          .nearmap
+            #nearBanksMap.map

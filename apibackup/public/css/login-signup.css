@@ -1,0 +1,183 @@
+.top-circles {
+  position: absolute;
+  top: -1.5rem;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  background-color: #78ad25;
+  padding: 1em;
+}
+
+.top-circles-login {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #78ad25;
+  width: 5rem;
+  height: 5rem;
+  top: -2.5rem;
+  left: calc( ( 100% - 5rem ) / 2 );
+  padding: 0;
+  background-size:100%;
+}
+
+.font-btn {
+  font-size: 0.9em;
+}
+
+.section-login {
+  /* padding: 30px 0; */
+  min-height: 85vh;
+}
+
+.card-register {
+  padding: 10px;
+  padding-top: 24px;
+}
+
+.g-recaptcha {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
+.register-label {
+  padding: 10px 50px;
+}
+
+.menorca-input {
+  width: 100%;
+  height: 2rem;
+  border: none;
+  background-color: #e9e9e9;
+  padding: 0 1.5em;
+  -moz-appearance:none; 
+  -webkit-appearance:none;
+  appearance:none;
+  color: #646464;
+  font-weight: 500;
+}
+
+.menorca-input::placeholder {
+  color: #646464;
+  opacity: 1;
+}
+
+.input-icon {
+  font-size: 1.2em;
+  color: #8b8b8b; 
+  position: absolute;
+  right: 1.5rem;
+  top: 0.6rem;
+}
+
+.btn-menorca {
+  background: darkorange;
+  border: 1px solid darkorange;
+}
+
+.btn-menorca:focus{
+  background-color: #008533 !important;
+  border: 1px solid #008533 !important;
+  color: white !important;
+}
+.btn-menorca2 {
+  background: #78ad25;
+  border: 1px solid #78ad25;
+  font-size: 1.2em;
+  color: white;
+}
+
+.card-menorca {
+  /* background: red; */
+  width: 100%;
+  height: 95%;
+  border-radius: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: 105%;
+  background-position: center;
+}
+
+.inner-card-login {
+  width: 100%;
+  padding: 32px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 3px solid #78ad25;
+  border-radius: 32px;
+  position: relative;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-primary3 {
+  color: rgb(20, 139, 41, 0.9);
+}
+
+.bkg-primary3 {
+  background-color: rgb(20, 139, 41, 0.9);
+}
+
+.comercial-menorca {
+  object-fit: fill;
+  width: auto;
+  height: 600px;
+}
+.mymap {
+  height: 300px;
+}
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+.text-center-not-important {
+  text-align: center;
+}
+
+@media (min-width: 350px) {
+  .w-sm-50 {
+    width: 50%!important;
+  }
+  .card-register {
+    padding: 16px;
+    padding-top: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  
+  .w-md-50 {
+    width: 50%!important;
+  }
+  
+  .font-btn {
+    font-size: 1.4em;
+  }
+  .card-register {
+    padding: 32px;
+    padding-top: 40px;
+  }
+  .text-md-start {
+    text-align: start;
+  }
+}
+
+@media (min-width: 992px) {
+  .inner-card-login {
+    width: 85%;
+  }
+  .register-label {
+    padding: 25px 50px;
+    padding-bottom: 0;
+  }
+  .w-lg-50 {
+    width: 50%!important;
+  }
+  .text-lg-start {
+    text-align: start !important;
+  }
+}

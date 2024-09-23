@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .container-fluid
+        .row: .col-12: .card: .card-body
+          .row
+            .col-md-2
+            .col-md-10
+              h3 ¿Se te olvidó tu contraseña?
+          form(method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .row
+              .col-md-3
+              .col-md-7
+                p.pb-4 Ingresa tu correo y te enviaremos las instrucciones para restablecer tu contraseña.
+            .row.form-group
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Correo
+              .col-md-7
+                input.form-control(type='email', name='email', id='email', placeholder='Correo', autofocus, autocomplete='email', required)
+            .row
+              .col-md-3
+              .col-md-7.text-right.form-group.offset-sm-3.col-md-7.pl-2
+                button.btn.btn-primary(type='submit')
+                  i.fas.fa-key.fa-sm
+                  | Restablecer Contraseña

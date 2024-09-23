@@ -1,0 +1,59 @@
+extends ../layout
+
+block content
+  #admin-frequent-questions.page-wrapper: .container-fluid: .row: .col-12
+    .card
+      .card-body
+        h3.my-4.title-primary2.card-title.text-center Preguntas frecuentes
+        .row.align-items-center.mb-4
+          .col-md-8.d-flex.flex-column.flex-md-row
+            input.form-control.my-2(type="text" placeholder='Busca tu pregunta frecuente' v-model.lazy='search.questionTitle')
+            .mx-3
+            select.form-control.my-2(v-model='search.questionCategory')
+              option(value='' selected) Todas las categorías
+              option(v-for='questionsCategory in questionsCategories' :key='questionsCategory._id' :value='questionsCategory._id')
+                | {{ questionsCategory.name }}
+          .col-md-4.text-end
+            a.btn.btn-primary(href='/admin/preguntas-frecuentes/crear') Crear pregunta
+        #accordian-part: #accordian-1
+          div(v-if='frequentQuestions.length != 0')
+            .card.mb-3(v-for="(frequentQuestion, index) in frequentQuestions" :key="frequentQuestions._id")
+              .card-header.bg-white
+                h5.mb-0.d-flex.flex-column.flex-md-row.align-items-center.justify-content-between
+                  a#heading.link.text-center-not-important.text-md-start(href='#' data-toggle='collapse' :data-target='"#fq" + frequentQuestion._id' aria-expanded='true' aria-controls='collapse1')
+                    | {{ frequentQuestion.question }}
+                  .my-2
+                  .d-flex
+                    .dropdown
+                      button#dropdownMenuButton.mr-3.btn.btn-light.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") opciones
+                      .dropdown-menu(aria-labelledby="dropdownMenuButton")
+                        a.dropdown-item(:href='"/admin/preguntas-frecuentes/"+ frequentQuestion._id +"/editar"') editar
+                        a.dropdown-item(href='javascript:void(0)' @click='deleteFrequentQuestion(frequentQuestion._id)') eliminar
+                    a.btn.btn-primary(@click='setSelectedQuestion(frequentQuestion)') orden
+              .collapse(:id='"fq" + frequentQuestion._id' aria-labelledby='heading' data-parent='#accordian-1' class=(questionId==='C1'?'show':''))
+                .card-body(v-html='frequentQuestion.answer')
+          div(v-else)
+            .card.my-5(style="box-shadow: none;")
+              .card-header.bg-white.text-center
+                h5.mb-0 No hay preguntas frecuentes para mostrar
+        .row.py-3: .col-12.d-flex.justify-content-center
+          .mx-1(v-for='pageListItem in pagesList' :key='"page" + pageListItem')
+            a.btn(href='javascript:void(0)' @click='getFrequentQuestions(pageListItem)' :class='[ isActualPage(pageListItem) ? "btn-primary" : "btn-outline-primary" ]') {{ pageListItem }}
+    //- MODAL
+    #FrequentQuestion.modal.fade(tabindex='-1' role='dialog' aria-labelledby='FrequentQuestionLabel' aria-hidden='true' data-backdrop="static" data-keyboard="false")
+      .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content.py-3
+          .modal-header.justify-content-center.pb-0(style='border:none')
+            h5#FrequentQuestionLabel.modal-title.text-bold.pb-0.text-primary Número de orden
+          .modal-body
+            .row.justify-content-center
+              .col-8.text-center
+                p.mb-3 {{ selectedQuestion ? ` ${selectedQuestion.question}` : 'Seleccione una pregunta' }}
+                .dropdown
+                  button#orderBtn.btn.btn-light.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :disabled='isProcessing ? true : false')
+                    | {{ showActualQuestionOrder }}
+                  .dropdown-menu.custom-dropdown-menu(aria-labelledby="orderBtn")
+                    div(v-for="orderListItem in orderList" :key="orderListItem" :value='orderListItem')
+                      a.dropdown-item(v-if='selectedQuestion && orderListItem != selectedQuestion.order' href='javascript:void(0)' @click='changeQuestionOrder(orderListItem)') {{ orderListItem + 1 }}
+              .col-12.pt-2.text-end
+                a.btn.btn-primary(href='javascript:void(0)' :data-dismiss="isProcessing ? '' : 'modal' " :class='{ disabled: isProcessing }') Guardar

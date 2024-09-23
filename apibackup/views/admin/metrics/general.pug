@@ -1,0 +1,78 @@
+extends ../../layout
+
+block content
+  .page-wrapper: .container-fluid: .row: .col-12: .card: .card-body
+    #admin-general-metrics.px-5
+
+      #title.text-center: h1.title-primary2 Métricas
+
+      #filters-section: .row.mt-3.mb-5
+        .col-12.text-center: p Rango de fecha
+        .col-12: .row.justify-content-center.align-items-center
+          input.form-control.border-primary2.mb-2.mx-2#reportrange(style='width: 200px')
+          a.btn.btn-primary.mb-2.mx-2(@click='clearFilters' style='width: 200px') Limpiar filtro
+
+      #general-metrics-section
+        .row.justify-content-center.mb-5(v-if='metrics != null')
+          .col-10.col-md-4.col-xl-2.mb-4: .metric-card
+            p PagoEfectivo
+            p CIPs generados
+            .metric-card-value {{ metrics.cipsCount }}
+          .col-10.col-md-4.col-xl-2.mb-4: .metric-card
+            p Mis consultas
+            p N° de consultas
+            .metric-card-value {{ metrics.requestsCount }}
+          .col-10.col-md-4.col-xl-2.mb-4: .metric-card
+            p Mis referidos
+            p N° de referido
+            .metric-card-value {{ metrics.referredsCount }}
+          .col-10.col-md-4.col-xl-2.mb-4: .metric-card
+            p Usuarios
+            p N° de registros
+            .metric-card-value {{ metrics.usersCount }}
+          .col-10.col-md-4.col-xl-2.mb-4: .metric-card
+            p Mis construcciones
+            p N° de proformas creadas
+            .metric-card-value {{ metrics.budgetsCount }}
+
+      #path-metrics-section
+        .row
+
+          .col-12.col-md-6.mb-4.d-none.d-sm-block
+            canvas#mychart(width='400', height='400')
+
+          .col-12.col-md-6(v-if='pathAnalytics != null'): .row.justify-content-center
+            .col-10.col-md-8.col-lg-6.mb-4: .metric-card
+              p Blog Menorca
+              p Cantidad de visitas
+              .metric-card-value {{ pathAnalytics.noticias }}
+            .col-10.col-md-8.col-lg-6.mb-4: .metric-card
+              p Mis inmuebles
+              p Cantidad de visitas
+              .metric-card-value {{ pathAnalytics.inmuebles }}
+            .col-10.col-md-8.col-lg-6.mb-4: .metric-card
+              p Pagos más cercanos
+              p Cantidad de visitas
+              .metric-card-value {{ pathAnalytics.pagoCercano }}
+            .col-10.col-md-8.col-lg-6.mb-4: .metric-card
+              p Mis construcciones
+              p Cantidad de visitas
+              .metric-card-value {{ pathAnalytics.construcciones }}
+            .col-10.col-md-8.col-lg-6.mb-4: .metric-card
+              p Mis referidos
+              p Cantidad de visitas
+              .metric-card-value {{ pathAnalytics.referidos }}
+            .col-10.col-md-8.col-lg-6.mb-4: a(href='/metricas/consultas').metric-card
+              p Mis consultas
+              p Cantidad de visitas
+              .metric-card-value {{ pathAnalytics.consultas }}
+            .col-10.col-md-8.col-lg-6.mb-4: .metric-card
+              p Preguntas frecuentes
+              p Cantidad de visitas
+              .metric-card-value {{ pathAnalytics.preguntas }}
+            .col-10.col-md-8.col-lg-6.mb-4: .metric-card
+              p Usuarios
+              p Cantidad de inicios de sesión
+              .metric-card-value {{ pathAnalytics.login }}
+
+  script(src='/js/vue/admin/metrics/general.js' defer)

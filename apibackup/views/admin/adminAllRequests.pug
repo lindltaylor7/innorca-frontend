@@ -1,0 +1,82 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid#admin-all-requests
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Solicitudes
+        .card-subtitle 
+          hr
+          .row
+            .col-12
+              h4.text-muted
+                strong Filtros
+        .row
+          .col-md-3
+            strong.text-primary2(style="margin-right:1em") Fecha de creación
+            input.select2.form-control.border-primary2#reportrange
+          .col-md-3
+            strong.text-primary2 Proyecto
+            select.select2.form-control.border-primary2#projectInput(name="select" @change=`getOtherRequests($event, 'project')`)
+              option(value="nofilter" selected disabled hidden) proyecto
+              option#noFilterProject(value="nofilter") Sin Filtro
+              each project in projects
+                option(value=`${project._id}`) #{project._id}
+          .col-md-3
+            strong.text-primary2(style="margin-right:1em") Estado
+            select.select2.form-control.border-primary2#statusInput(name="select" @change=`getOtherRequests($event, 'status')`)
+              option(value="nofilter" selected disabled hidden) estado
+              option#noFilterStatus(value="nofilter") Sin filtro
+              option(value="0") Sin responder
+              option(value="1") Respondido
+              option(value="2") Finalizado
+          .col-md-3.h-100.align-self-end.text-end.mt-2.mt-md-0
+            button.btn.btn-primary(@click.prevent='clearFilters()') Limpiar Filtros
+        hr
+        .card-title
+          .row
+            .col-6.text-start
+              h4 Gestionar Solicitudes
+            .col-6.text-end
+              a.btn.btn-primary(:href='exportUrl' target='_blank') Exportar
+          .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-md-none
+                .col-auto.pl-1
+                  strong.text-primary.m-0 Ver más
+                .col-auto.pr-1
+                  img.ml-2(src="/images/arrow.png", width="25px", alt="")
+        .table-responsive.mt-4
+          table.table
+            thead: tr.bkg-primary.text-white
+                th(scope='col') #
+                th(scope='col') Nombre
+                th(scope='col') Proyecto 
+                th(scope='col') Estado
+                th(scope='col') Fecha de creación
+                th(scope='col') Hora de creación
+                th(scope='col') Dias transcurridos
+            tbody
+                tr.cursor-pointer(v-if='requests !== null' v-for="(request, index) in requests" :key="index" @click.prevent='openRequest(request._id)')
+                  td {{index+1 + (page-1)*10}}
+                  td(v-if="request.userName") {{request.userName}}
+                  td(v-else) -
+                  td(v-if="request.nameProject") {{request.nameProject}}
+                  td(v-else) -
+                  td(v-if="request.status==1") Respondido
+                  td(v-else-if="request.status==2") Cerrado
+                  td(v-else) Sin responder
+                  td(v-if="request.createdAt") {{request.createdAt}}
+                  td(v-else) -
+                  td(v-if="request.creationHour") {{request.creationHour}}
+                  td(v-else) -
+                  td(v-if="request.diffDays") {{request.diffDays}}
+                  td(v-else) -
+          .text-center(v-if="requests.length===0 && filter!==null && !isProcessing") No se encontraron resultados
+          .text-center(v-if="isProcessing") Cargando ...
+        .form-actions: .text-right
+          a.btn.btn-primary.back-btn(v-if="page > 1" @click.prevent=`getOtherRequests($event, 'noType', 'false')`) Atrás
+          a.btn.btn-secondary.back-btn(v-else) Atrás
+          a.btn.btn-primary(v-if="total_pages > page" @click.prevent=`getOtherRequests($event, 'noType', 'true')`) Ver más
+          a.btn.btn-secondary(v-else) Ver más
+
+  script(src='/js/vue/admin/adminAllRequests.js?v=0.0.1' defer)

@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body
+        .row.border-bottom
+          .col-md-3.text-right.pb-2.mt-2.mb-4.border-bottom
+            h3 Restrablecer Contraseña
+        form(method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group.row
+            label.col-md-3.col-form-label.font-weight-bold.text-right(for='password') Nueva Contraseña
+            .col-md-7
+              input.form-control(type='password', name='password', id='password', placeholder='Nueva Contraseña', autofocus, autocomplete='new-password', minlength='8', required)
+          .form-group.row
+            label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirm') Confirmar Contraseña
+            .col-md-7
+              input.form-control(type='password', name='confirm', id='confirm', placeholder='Confirmar Contraseña', autocomplete='new-password', minlength='8', required)
+          .row
+            .col-md-3
+            .col-md-7.text-right.form-group.offset-sm-3.col-md-7.pl-2
+              button.btn.btn-primary.btn-reset(type='submit')
+                i.far.fa-keyboard.fa-sm
+                | Change Password

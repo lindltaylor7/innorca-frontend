@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row.justify-content-center: .col-md-8: .card
+        .card-header
+          h1.text-white.news-header.text-center #{post.title||"No definido"}
+        img.img-fluid(src=(post.image? `${post.image}`:'/assets/images/big/img4.jpg') alt='Card image cap').mr-auto.ml-auto.mt-5.mb-3
+        .container
+          .card-body
+            .d-flex.no-block.align-items-center.mb-3
+              span
+                i.ti-calendar
+                  | 
+                |  #{moment(post.createdAt).format('LL') }
+            h2.font-normal #{post.subTitle||"No definido"}
+            p.mb-0.mt-2#map_0.titleMap(content=post.content)
+            if (post.link)
+              h3.mb-0.mt-2 Referencia:
+              ol.mt-2
+                li 
+                  h5
+                    a.text-muted(href=`${post.link||"#"}` target="_blank") #{post.link||"No definido"}
+            if (post.fileUrl)
+              a.d-flex.align-items-center(type="button" href=`${post.fileUrl||"#"}` target="_blank") 
+                strong #{post.fileName?post.fileName:'Archivo adjunto'}
+                i.mdi.mdi-file-document(style='font-size:2em; margin-left:8px')

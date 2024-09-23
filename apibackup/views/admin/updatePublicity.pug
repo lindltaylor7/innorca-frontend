@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+        .pb-2.mb-4.mt-5.border-bottom.section-white
+          h2.title-primary2 Editar Publicidad
+        form#answer-form(method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .row.justify-content-center
+            .col-10
+              .form-group.row
+                label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='disponible') Estado
+                label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='disponible') Estado
+                .col-md-7
+                  select.form-control(name='disponible')
+                    option(value="") --Elegir--
+                    if (!publicity)
+                      option(value=0 ) No visible
+                      option(value=1 ) Visible
+                    else
+                      option(value=0 selected=publicity.disponible==0) No visible
+                      option(value=1 selected=publicity.disponible==1) Visible
+              .form-group.row
+                label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='link') Link de redirección
+                label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='link') Link de redirección
+                .col-md-7
+                  input#link.form-control(type='text', name='link' value=publicity?publicity.link:"" )
+                  Strong.text-danger * No olvidar anteponer "https://" o "http://"
+            .col-10
+              .form-group.row
+                label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='link') Imagen
+                label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='link') Imagen
+                .col-md-2
+                  img.uploadimage(id=`image` src=(publicity?publicity.image:"http://placehold.it/170x600") alt='img', width='100%', style="object-fit: cover; cursor:pointer;" preview=`image` url=`hidden_url`)
+                  input(id=`hidden_url` type="hidden" name="image" value=publicity?publicity.image:"http://placehold.it/170x600" required)
+                .col-md-5.d-flex.align-items-center
+                  Strong.text-danger * Resolución sugerida 170px X 600px
+          .form-group.mt-4
+            .col-12(align="center")
+              button.btn.btn-success(type='submit')
+                i.fas.fa-lock.fa-sm.mr-2
+                | Actualizar

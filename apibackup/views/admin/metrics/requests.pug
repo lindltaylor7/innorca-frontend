@@ -1,0 +1,85 @@
+extends ../../layout
+
+block content
+  .page-wrapper: .container-fluid: .row: .col-12: .card: .card-body
+    #admin-requests-metrics.px-5
+
+      #requests-section
+        #requests-title.text-center: h1.title-primary2 Consultas
+
+        #requests-filters-section: .row.mt-3.mb-5
+          .col-12.text-center: p Rango de fecha
+          .col-12: .row.justify-content-center.align-items-center
+            input.form-control.border-primary2.mb-2.mx-2#reportrange(style='width: 200px')
+            a.btn.btn-primary.mb-2.mx-2(@click='clearFilters' style='width: 200px') Limpiar filtro
+          .col-12: .row.justify-content-center.align-items-center
+            a.btn.btn-primary.mb-2.mx-2(@click='applyToAll' style='width: 300px') Filtrar a todas las secciones
+
+        #general-requests-section
+          .row.justify-content-center.mb-5(v-if='metrics != null')
+            .col-10.col-md-4.col-xl-2.mb-4: .metric-card
+              p Cantidad de visitas
+              .metric-card-value {{ metrics.requestsMetricsCount }}
+            .col-10.col-md-4.col-xl-2.mb-4: .metric-card
+              p Cantidad de consultas creadas
+              .metric-card-value {{ metrics.requestsCount }}
+
+      #requests-attention-section.px-5
+        #attention-requests-title.text-center: h1.title-primary2 Tipo de atención
+
+        #requests-attention-filters-section: .row.mt-3.mb-5
+          .col-12.text-center: p Rango de fecha
+          .col-12: .row.justify-content-center.align-items-center
+            input.form-control.border-primary2.mb-2.mx-2#reportrange2(style='width: 200px')
+            a.btn.btn-primary.mb-2.mx-2(@click='clearFilters2' style='width: 200px') Limpiar filtro
+
+        #requests-attention-metrics-section
+          .row.justify-content-center.mb-5.align-items-center
+            .col-12.col-md-6.d-none.d-sm-block(style='position: relative')
+              canvas#mychartattention(width='400', height='400')
+            .col-12.col-md-6(v-if='metrics != null')
+              .row.justify-content-between.mb-2
+                .col Consulta de atención al cliente
+                .col.text-end.text-primary {{ findAttentionTypeName(0) }}
+              .row.justify-content-between.mb-2
+                .col Consulta de cobranzas
+                .col.text-end.text-primary {{ findAttentionTypeName(1) }}
+              .row.justify-content-between.mb-2
+                .col Otras consultas
+                .col.text-end.text-primary {{ findAttentionTypeName(2) }}
+
+      #requests-type-section.px-5
+        #request-type-title.text-center: h1.title-primary2 Tipo de proyecto
+
+        #requests-type-filters-section: .row.mt-3.mb-5
+          .col-12.text-center: p Rango de fecha
+          .col-12: .row.justify-content-center.align-items-center
+            input.form-control.border-primary2.mb-2.mx-2#reportrange3(style='width: 200px')
+            a.btn.btn-primary.mb-2.mx-2(@click='clearFilters3' style='width: 200px') Limpiar filtro
+
+        #request-type-metrics-section
+          .row.justify-content-center.align-items-center.mb-5
+            .col-12.col-md-6.d-none.d-sm-block(style='position: relative')
+              canvas#mycharttype(width='400', height='400')
+            .col-12.col-md-6(v-if='metrics != null')
+              .row.justify-content-between.mb-2(v-for='type in metrics.typeProductCount')
+                .col-9(v-if='[0,1].includes(type._id)') {{ type._id == 0 ? 'Lotes' : 'Casas' }}
+                .col-3.text-end.text-primary(v-if='[0,1].includes(type._id)') {{ type.count }}
+
+      #requests-project-section
+        #request-project-title.text-center: h1.title-primary2 Ranking de consultas por proyecto
+
+        #requests-project-filters-section: .row.mt-3.mb-5
+          .col-12.text-center: p Rango de fecha
+          .col-12: .row.justify-content-center.align-items-center
+            input.form-control.border-primary2.mb-2.mx-2#reportrange4(style='width: 200px')
+            a.btn.btn-primary.mb-2.mx-2(@click='clearFilters4' style='width: 200px') Limpiar filtro
+
+        #request-project-metrics-section(v-if='metrics != null')
+          .row.justify-content-center.mb-5
+            .col-12.col-md-6(v-for='type in metrics.projectNameCount')
+              .row.justify-content-center.mb-2(v-if="!['a', '', 'fgsf', null, undefined].includes(type._id)")
+                .col-9 {{ type._id }}
+                .col-3.text-start.text-primary {{ type.count }}
+
+  script(src='/js/vue/admin/metrics/requests.js' defer)

@@ -1,0 +1,56 @@
+.card {
+    border: 1px solid #40893C;
+    border-radius: 13px;
+    padding: 16px;
+    min-height: 178px;
+    font-size: 13px;
+
+    small {
+        font-size: 12px;
+        line-height: 1.5;
+        margin-top: 10px;
+        display: block;
+    }
+
+    &__title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 16px 0;
+
+        @include desktop() {
+            min-height: 48px;
+        }
+    }
+
+    .card-title {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #158A2F;
+        margin: 0;
+    }
+
+    .card-aux {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #158A2F;
+    }
+
+    .info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        color: #444;
+    }
+
+    &.sm-card {
+        min-height: 118px !important;
+    }
+}

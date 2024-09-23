@@ -1,0 +1,128 @@
+[
+  {
+    "name": "atencion-al-cliente",
+    "path": "/atencion-al-cliente",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\atencion-al-cliente\\\\index.vue",
+    "chunkName": "pages/atencion-al-cliente/index"
+  },
+  {
+    "name": "construcciones",
+    "path": "/construcciones",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\construcciones\\\\index.vue",
+    "chunkName": "pages/construcciones/index"
+  },
+  {
+    "name": "inicio",
+    "path": "/inicio",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\inicio\\\\index.vue",
+    "chunkName": "pages/inicio/index"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\login\\\\index.vue",
+    "chunkName": "pages/login/index"
+  },
+  {
+    "name": "mi-perfil",
+    "path": "/mi-perfil",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mi-perfil\\\\index.vue",
+    "chunkName": "pages/mi-perfil/index"
+  },
+  {
+    "name": "mis-inmuebles",
+    "path": "/mis-inmuebles",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mis-inmuebles\\\\index.vue",
+    "chunkName": "pages/mis-inmuebles/index"
+  },
+  {
+    "name": "mis-pagos",
+    "path": "/mis-pagos",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mis-pagos\\\\index.vue",
+    "chunkName": "pages/mis-pagos/index"
+  },
+  {
+    "name": "mis-referidos",
+    "path": "/mis-referidos",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mis-referidos\\\\index.vue",
+    "chunkName": "pages/mis-referidos/index"
+  },
+  {
+    "name": "noticias",
+    "path": "/noticias",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\noticias\\\\index.vue",
+    "chunkName": "pages/noticias/index"
+  },
+  {
+    "name": "preguntas-frecuentes",
+    "path": "/preguntas-frecuentes",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\preguntas-frecuentes\\\\index.vue",
+    "chunkName": "pages/preguntas-frecuentes/index"
+  },
+  {
+    "name": "recuperar-contrasena",
+    "path": "/recuperar-contrasena",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\recuperar-contrasena\\\\index.vue",
+    "chunkName": "pages/recuperar-contrasena/index"
+  },
+  {
+    "name": "signup",
+    "path": "/signup",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\signup\\\\index.vue",
+    "chunkName": "pages/signup/index"
+  },
+  {
+    "name": "atencion-al-cliente-modal",
+    "path": "/atencion-al-cliente/modal",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\atencion-al-cliente\\\\modal.vue",
+    "chunkName": "pages/atencion-al-cliente/modal"
+  },
+  {
+    "name": "construcciones-nueva-cotizacion",
+    "path": "/construcciones/nueva-cotizacion",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\construcciones\\\\nueva-cotizacion\\\\index.vue",
+    "chunkName": "pages/construcciones/nueva-cotizacion/index"
+  },
+  {
+    "name": "mi-perfil-cambio-contrasena",
+    "path": "/mi-perfil/cambio-contrasena",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mi-perfil\\\\cambio-contrasena.vue",
+    "chunkName": "pages/mi-perfil/cambio-contrasena"
+  },
+  {
+    "name": "atencion-al-cliente-detalle-id",
+    "path": "/atencion-al-cliente/detalle/:id?",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\atencion-al-cliente\\\\detalle\\\\_id.vue",
+    "chunkName": "pages/atencion-al-cliente/detalle/_id"
+  },
+  {
+    "name": "construcciones-cotizacion-id",
+    "path": "/construcciones/cotizacion/:id?",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\construcciones\\\\cotizacion\\\\_id.vue",
+    "chunkName": "pages/construcciones/cotizacion/_id"
+  },
+  {
+    "name": "noticias-post-id",
+    "path": "/noticias/post/:id?",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\noticias\\\\post\\\\_id.vue",
+    "chunkName": "pages/noticias/post/_id"
+  },
+  {
+    "name": "recuperar-contrasena-generar-id",
+    "path": "/recuperar-contrasena/generar/:id",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\recuperar-contrasena\\\\generar\\\\_id.vue",
+    "chunkName": "pages/recuperar-contrasena/generar/_id"
+  },
+  {
+    "name": "completar-registro-id",
+    "path": "/completar-registro/:id?",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\completar-registro\\\\_id.vue",
+    "chunkName": "pages/completar-registro/_id"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]

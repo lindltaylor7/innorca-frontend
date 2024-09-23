@@ -1,0 +1,33 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+            
+jobs:
+  deploy-prod:
+    docker:
+    - image: circleci/node:10.18.0
+          
+    steps:
+          
+      - checkout
+      - run: 
+          name: ssh
+          command: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "./deploy_menorca.sh"
+      
+         
+workflows:
+  version: 2
+  
+  deploy:
+  
+    jobs:
+    
+      - deploy-prod:
+      
+          filters:
+          
+            branches:
+            
+              only:
+              
+                - master

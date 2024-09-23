@@ -1,0 +1,41 @@
+.accordion {
+
+    .tab__header {
+        .tab__link {
+            background: white;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            text-decoration: none;
+            color: #686868 !important;
+            font-size: 14px;
+            padding: 11px;
+            padding-left: 9px !important;
+            border-bottom: solid 1px #e9e9e9;
+
+            .down-Arrow svg,
+            .up-Arrow svg {
+                color: green;
+                font-size: 15px;
+            }
+        }
+    }
+
+    .tab__content {
+        padding: 11px;
+        padding-left: 9px !important;
+        border-bottom: solid 1px #e9e9e9;
+    }
+}
+
+
+.frequent-questions {
+
+    .accordion:last-child {
+
+        .tab__link,
+        .tab__content {
+            border-bottom: none;
+        }
+    }
+}

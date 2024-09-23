@@ -1,0 +1,64 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body: .row.justify-content-center
+        .col-md-6
+          .card-title
+            h2 Detalles del referido
+          .col-12.mt-4
+            .form-group: .row
+              .col-md-4.text-white.bkg-primary2.py-2.mb-1
+                | Estado
+              .col-md-1
+              .col-md-7.text-white.bkg-primary2.py-2
+                - 
+                  const statusesObject = {
+                    pending                    : 'Pendiente',
+                    deposit_payment_created    : 'Depósito',
+                    deposit_financial_created  : 'Depósito',
+                    process_separation_created : 'Separación',
+                    process_sale_completed     : 'En proceso de venta',
+                    process_canceled_created   : 'Desistió',
+                    reserv_created             : 'Reserva',
+                    reserv_canceled            : 'Reserva',
+                  }
+                div #{ statusesObject[referred.sperantStatus] }
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Nombre
+              .col-md-1
+              .col-md-7
+                div #{referred.name}
+            .form-group: .row
+              .col-md-4.text-primary2
+                | DNI
+              .col-md-1
+              .col-md-7
+                div #{referred.dni}
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Correo
+              .col-md-1
+              .col-md-7
+                div #{referred.email}
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Teléfono
+              .col-md-1
+              .col-md-7
+                div #{referred.phone}
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Tipo de Proyecto
+              .col-md-1
+              .col-md-7
+                each project in projects
+                  div #{project.name}
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Comentarios
+              .col-md-1
+              .col-md-7
+                textarea.form-control.h-6rem(placeholder=`${referred.comments}` readOnly)

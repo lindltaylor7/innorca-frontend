@@ -1,0 +1,74 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row.justify-content-center
+        .col-md-6
+          .card
+            .card-body
+              .card-title.mb-4
+                h2.title-primary2 Métricas Generales
+              .row
+                .col-md-6
+                  .card
+                    .card-body
+                      .d-flex.no-block.align-items-center
+                        div
+                          span.text-primary2.display-6
+                            i.ti-notepad
+                        .ml-auto.text-end
+                          h2 #{requestCount}
+                          span.pl-2.d-inline-block Cantidad de Solicitudes
+                .col-md-6
+                  .card
+                    .card-body
+                      .d-flex.no-block.align-items-center
+                        div
+                          span.text-primary2.display-6
+                            i.ti-user
+                        .ml-auto.text-end
+                          h2 #{referredCount}
+                          span.pl-2.d-inline-block Número de Referidos
+                .col-md-6
+                  .card
+                    .card-body
+                      .d-flex.no-block.align-items-center
+                        div
+                          span.text-primary2.display-6
+                            i.ti-notepad
+                        .ml-auto.text-end
+                          if (countReferredClient)
+                            h2 #{countReferredClient}
+                          else
+                            h2 0
+                          span.pl-2.d-inline-block Cantidad de Referidos por Clientes
+                .col-md-6
+                  .card
+                    .card-body
+                      .d-flex.no-block.align-items-center
+                        div
+                          span.text-primary2.display-6
+                            i.ti-notepad
+                        .ml-auto.text-end
+                          if (countReferredWorkers)
+                            h2 #{countReferredWorkers}
+                          else
+                            h2 0
+                          span.pl-2.d-inline-block Cantidad de Referidos por Trabajadores
+                .col-12
+                  .card
+                    .card-body
+                      h5 Proyectos con más Solicitudes
+                      ul
+                        each topRequestedProject in topRequestedProjects
+                          li #{topRequestedProject._id.nameProject}
+                .col-12
+                  .card
+                    .card-body
+                      h5 Usuarios con más Referidos
+                      ul
+                        each topReferencer in topReferencers
+                          li #{topReferencer.profile.name}
+
+

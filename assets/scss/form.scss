@@ -1,0 +1,156 @@
+#form {
+
+    .form {
+        padding: 20px 0 40px 0;
+
+        .location {
+            font-size: 13px;
+            line-height: 25px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            align-items: center;
+
+            .red {
+                color: $red;
+                margin-right: 7px;
+            }
+
+            .arrow-down {
+                color: $red;
+                margin-left: 7px;
+            }
+        }
+
+        h2.title {
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 24px;
+            position: relative;
+            margin-bottom: 55px;
+    
+            &:after {
+                content: "";
+                height: 3px;
+                width: 35px;
+                background-color: $red;
+                display: inline-block;
+                position: absolute;
+                left: 0;
+                bottom: -7px;
+            }
+        }
+    
+    
+        form {
+            h4 {
+                font-size: 18px;
+                margin-top: 25px;
+            }
+    
+            .form-control {
+                background: #FFFFFF;
+                border: 1px solid #F2F2F2;
+                box-sizing: border-box;
+                box-shadow: 0px 5px 10px #e6e6e6;
+                border-radius: 10px;
+                padding: 22px;
+                font-size: 16px;
+
+                &.is-invalid {
+                    border: 1px solid #dc3545;
+                }
+
+                &:disabled {
+                    background-color: #e2e2e2;
+                }
+            }
+
+            #documento {
+                padding: 10px;
+                height: 46px;
+                font-weight: 500;
+                appearance: none;
+
+                & + label {
+                    position: absolute;
+                    top: 25px;
+                    right: 20px;
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    pointer-events: none;
+                    color: $red;
+                }
+            }
+
+            #dir_fiscal {
+                background: url(~assets/img/formulario/direcfiscal-icon.svg) no-repeat scroll 20px 12px;
+                padding-left: 47px;
+                font-weight: 500;
+            }
+
+            #raz_social {
+                background: url(~assets/img/formulario/razsoc-icon.svg) no-repeat scroll 20px 12px;
+                padding-left: 47px;
+                font-weight: 500;
+            }
+
+            #nombres {
+                background: url(~assets/img/formulario/person-icon.svg) no-repeat scroll 20px 12px;
+                padding-left: 47px;
+                font-weight: 500;
+            }
+
+            #apellidos {
+                font-weight: 500;
+            }
+
+            #celular {
+                background: url(~assets/img/formulario/cellphone-icon.svg) no-repeat scroll 20px 12px;
+                padding-left: 47px;
+                font-weight: 500;
+            }
+
+            #email {
+                background: url(~assets/img/formulario/email-icon.svg) no-repeat scroll 20px 12px;
+                padding-left: 47px;
+                font-weight: 500;
+            }
+
+            #distrito {
+                background: url(~assets/img/formulario/dist-icon.svg) no-repeat scroll 20px 12px;
+                padding-left: 47px;
+                font-weight: 500;
+                background-color: #e2e2e2;
+            }
+
+            #direccion {
+                background: url(~assets/img/formulario/direc-icon.svg) no-repeat scroll 20px 12px;
+                padding-left: 47px;
+                font-weight: 500;
+            }
+
+            #referencias {
+                background: url(~assets/img/formulario/ref-icon.svg) no-repeat scroll 20px 12px;
+                padding-left: 47px;
+                font-weight: 500;
+            }
+        }
+
+        .tyc {
+            span {
+                color: $red;
+            }
+        }
+
+
+        .actions {
+            margin-top: 60px;
+
+            button:first-child {
+                margin-right: 28px;
+            }
+        }
+    }
+
+}

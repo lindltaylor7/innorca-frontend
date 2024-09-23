@@ -1,0 +1,127 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Vista preliminar
+        .card-subtitle
+          hr
+          if user.type==1
+            .col-8.offset-2.mb-2
+              .row.d-flex.justify-content-center.mt-2
+                a.btn.btn-primary.m-2(href=`/cotizacion/${quote._id}/enviar`) Enviar correo
+                if !quote.startProject
+                  a.btn.btn-success.btn-menorca.m-2(href=`/cotizacion/${quote._id}/comenzar`) Quiero comenzar con mi proyecto
+                a.btn.btn-primary.m-2(href=`/cotizacion/${quote._id}/descargar`) Descargar pdf
+              .row.d-flex.justify-content-center.mt-2
+                a.btn.btn-primary.mx-2(href='/cotizaciones') Guardar
+          .col-8.offset-2
+            .row.form-group
+              strong.my-2.text-primary2.col-6.text-right Tipo de construcción
+              strong.my-2.col-6 #{quote.projectType}
+              strong.my-2.text-primary2.col-6.text-right Tentativa de construcción
+              strong.my-2.col-6 #{quote.startDate}
+              strong.my-2.text-primary2.col-6.text-right  ¿Desea asesoría?
+              strong.my-2.col-6 #{quote.counseling?'Si':'No'}
+              strong.my-2.text-primary2.col-6.text-right Costo total de construcción
+                -
+                  function formatMoneyFaik(pay){
+                    pay = Math.ceil(pay)
+                    const formatter = new Intl.NumberFormat('en-US');
+                    pay = formatter.format(pay)
+                    return pay
+                  }
+              strong.my-2.col-6 S/#{formatMoneyFaik(quote.totalCostNumber)}
+          hr
+          .col-12
+            .row.form-group
+                each p, i in quote.projects
+                  .col-10.offset-1
+                    .row.form-group
+                      h2.my-2.col-12.text-center Proyecto: #{p.roomType} / Piso: #{p.location}
+                      strong.my-2.text-primary2.col-6.text-right  Largo
+                      strong.my-2.col-6 #{p.long} metros
+                      strong.my-2.text-primary2.col-6.text-right Ancho
+                      strong.my-2.col-6 #{p.width} metros
+                    .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-lg-none.text-rigth
+                      .col-auto.pl-1
+                        strong.text-primary.m-0 Ver más
+                      .col-auto.pr-1
+                        img.ml-2(src="/images/arrow.png", width="25px", alt="")
+                    .row.d-flex.justify-content-center
+                      .table-responsive.mt-2
+                        table.table
+                          thead
+                            tr.bkg-primary.text-white
+                              th.strong(scope='col') #
+                              th.strong(scope='col' style="min-width:403px;") MATERIALES EN CANTIDADES Y UNIDADES COMERCIALES
+                              th.strong(scope='col') CANTIDAD
+                              th.strong(scope='col') UNIDAD
+                              th.strong(scope='col') PRECIO UNITARIO
+                              th.strong(scope='col') TOTAL
+                          tbody
+                            each m, j in p.materials
+                              tr.nohover
+                                th.text-center #{m.index}
+                                th #{m.name}
+                                th.text-center #{m.quantity}
+                                th.text-center #{m.unit}
+                                th.text-center S/#{m.price}
+                                th.text-center S/#{m.parcialCost}
+                            tr.nohover2.bkg-primary.text-white 
+                              th(v-if='p.finalPrice' colspan=6).text-center 
+                                .col-12
+                                  .row.d-flex.justify-content-between 
+                                    h3.text-white.mb-0 COSTO TOTAL
+                                    h3.text-white.mb-0 S/#{formatMoneyFaik(p.totalCostNumber)}
+            .row.form-group.d-flex.justify-content-center
+              .col-12
+                .col-12.col-xl-6.offset-xl-3.col-lg-6.offset-lg-3.col-md-8.offset-md-2
+                    .table-responsive.mt-4 
+                      table.table
+                        tbody
+                          tr.bkg-primary.text-white 
+                            th(v-if='totalCost' colspan=6).text-center 
+                              .col-12
+                                .row.d-flex.justify-content-between 
+                                  h3.text-white.mb-0 COSTO FINAL
+                                  h3.text-white.mb-0 S/#{formatMoneyFaik(quote.totalCostNumber)}
+                if user.type==1
+                  .col-12.col-xl-6.offset-xl-3.col-lg-6.offset-lg-3.col-md-8.offset-md-2
+                      .card.mt-4 
+                        .card-body
+                          .card-title.text-center
+                            h4.title-primary2  ¡MUY IMPORTANTE!
+                          .card-subtitle.text-center
+                            h5  Antes de contruir recuerda que:
+                          .card-text
+                            ul
+                              li  Realizar una buena mezcla y vaciado nos ayudará a evitar burbujas de aire en las losas, columnas y vigas, con esto evitaremos caer en costos adicionales en la compra de aditivos para solucionar cangrejeras.
+                              li  Es recomendable utilizar una vibradora eléctrica para garantizar el movimiento que eliminará las burbujas de aire en la mezcla.
+                              li  Los muros de contención o pircas deben estar bien asentados para evitar deslizamientos futuros. /Una buena cimentación puede asegurar tu construcción y los pisos futuros que quieras construir. Las vigas y columnas siempre deben de estar unidas.
+                              li  Estudio de la calidad de suelo te puede y te sirve para saber la forma de segura de construir tu hogar.
+                      .table-responsive.mt-4 
+                        table.table.table-bordered
+                          thead
+                            tr.bkg-primary.text-white
+                              th(scope='col') NOTA IMPORTANTE
+                          tbody 
+                            tr.nohover
+                              th Todos los costos son referenciales y no incluye IGV.
+                            tr.nohover
+                              th Los precios fueron actualizados y modificados de acuerdo a la mano de obra y materiales en Lima Metropolitana y Callao, conforme a lo publicado, en la revista especializada para construcción COSTOS del año 2019 y su pagina web: 
+                                a(href="https://costosperu.com/PortalSuscriptores/Partidas" target="_blank") Costos Perú
+                            tr.nohover
+                              th Es importante mencionar que no se contemplan en estos costos los precios de las instalaciones sanitarias y electricas, estas se definiran por punto instalado por el mismo usuario.
+                            tr.nohover
+                              th Es importante contemplar sobre el costo final un 20% adicional para mantener un margen según el mercado.
+                  .col-8.offset-2  
+                    .row.d-flex.justify-content-center.mt-2
+                      a.btn.btn-primary.m-2(href=`/cotizacion/${quote._id}/enviar`) Enviar correo
+                      if !quote.startProject
+                        a.btn.btn-success.btn-menorca.m-2(href=`/cotizacion/${quote._id}/comenzar`) Quiero comenzar con mi proyecto
+                      a.btn.btn-primary.m-2(href=`/cotizacion/${quote._id}/descargar`) Descargar pdf
+                    .row.d-flex.justify-content-center.mt-2
+                      a.btn.btn-primary.mx-2(href='/cotizaciones') Guardar

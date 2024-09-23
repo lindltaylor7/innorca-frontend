@@ -1,0 +1,61 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid#admin-all-users
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Usuarios
+        .card-subtitle 
+          hr
+          .row
+            .col-12.d-flex.align-items-center.justify-content-between
+              h4.text-muted
+                strong Filtros
+            
+              a.btn.btn-primary.float-right(href=`/admin/usuarios/exportar`)
+                i.fas.fa-plus-circle
+                |  Exportar
+        .row
+          .col-md-3
+            strong.text-primary2 Tipo de Usuario
+            select.select2.form-control.border-primary2(name="select"  v-model="filter")
+              option(value="") Sin Filtro
+              option(value="1") Cliente
+              option(value="0") Trabajador
+        hr
+        .card-title
+          h4 Gestionar Usuarios
+          .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-lg-none
+            .col-auto.pl-1
+              strong.text-primary.m-0 Ver más
+            .col-auto.pr-1
+              img.ml-2(src="/images/arrow.png", width="25px", alt="")
+        .table-responsive.mt-4
+          table.table
+            thead: tr.bkg-primary.text-white
+              th(scope='col') Nombre
+              th(scope='col') Tipo de Documento
+              th(scope='col') Número de Documento
+              th(scope='col') Teléfono Principal
+              th(scope='col') Cliente/Trabajador
+            tbody
+              tr.cursor-pointer(v-if='users !== null' v-for="(user, index) in users" :key="index" @click.prevent='openUser(user._id)')
+                td(v-if="user.profile.name") {{user.profile.name}}
+                td(v-else) -
+                td(v-if="user.profile.docType") {{user.profile.docType}}
+                td(v-else) -
+                td(v-if="user.profile.document") {{user.profile.document}}
+                td(v-else) -
+                td(v-if="user.profile.mainTelephone") {{user.profile.mainTelephone}}
+                td(v-else) -
+                td(v-if="user.profile.menorcaType===0") Trabajador
+                td(v-else-if="user.profile.menorcaType===1") Cliente
+                td(v-else) -
+          .text-center(v-if="users.length===0 && filter!==null && !isProcessing") No se encontraron usuarios
+          .text-center(v-if="isProcessing") Cargando ...
+          .form-actions: .text-right
+            a.btn.back-btn.btn-primary(v-if="page > 1" @click.prevent=`getOtherUsers(false)`) Atrás
+            a.btn.back-btn(v-else) Atrás
+            a.btn.btn-primary(v-if="total_pages > page" @click.prevent=`getOtherUsers(true)`) Ver más
+            a.btn(v-else) Ver más

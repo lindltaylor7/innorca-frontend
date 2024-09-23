@@ -1,0 +1,168 @@
+extends ../layout
+
+block content
+  .page-wrapper: .container-fluid: .row: .col-12: .card: .card-body
+    #vue-requests-create(data-budgets=budgets): .row
+
+      #request-left-side.col-lg-4.col-sm-12
+        #request-left-side-title
+          h2.mt-3 Crear consulta
+          hr
+
+        #request-left-side-disclaimer
+          p.text-justify El tiempo aproximado de respuesta es de 48 a 72 horas.
+          p.text-justify Podrá revisar el estado y respuesta a su consulta en la sección de "Mis consultas", además le llegará una notificación y copia de su respuesta a su correo electrónico.
+
+        #request-left-side-carrousel: .row
+          #request-left-side-carrousel-title.col-12.text-center
+            h3.text-primary.card-title#questiontitle Preguntas frecuentes
+
+          #request-left-side-carrousel-body.col-12
+            .card
+              .card-body#carrousel1
+                #carouselExampleIndicators.carousel.slide(data-ride='carousel')
+                  .carousel-inner(role='listbox')
+                    a.carousel-item.active.px-5(href=`/preguntas-frecuentes?questionId=C1`)
+                      .card-header.bg-white
+                        h5 Ya estoy próximo a cancelar el total de mi lote, ¿Ustedes me entregan mi título de propiedad?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=C2`)
+                      .card-header.bg-white
+                        h5 ¿Cuándo es mi fecha de pago de mis letras?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=C3`)
+                      .card-header.bg-white
+                        h5 ¿Qué hacen con las letras en físico que ya cancelé? ¿Me las devolverán?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=C4`)
+                      .card-header.bg-white
+                        h5 ¿Cómo hago si deseo iniciar mi construcción? ¿A partir de cuándo puedo empezar? ¿Qué requisitos debo cumplir?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=C5`)
+                      .card-header.bg-white
+                        h5 ¿Cómo es el proceso de entrega de lotes?
+                  a.carousel-control-prev(href='#carouselExampleIndicators' role='button' data-slide='prev')
+                    span.carousel-control-prev-icon(aria-hidden='true' style='background-color:#008533')
+                    span.sr-only Previous
+                  a.carousel-control-next(href='#carouselExampleIndicators' role='button' data-slide='next')
+                    span.carousel-control-next-icon(aria-hidden='true' style='background-color:#008533')
+                    span.sr-only Next
+              .card-body.display-none#carrousel2
+                #carouselExampleIndicators2.carousel.slide(data-ride='carousel')
+                  .carousel-inner(role='listbox')
+                    a.carousel-item.active.px-5(href=`/preguntas-frecuentes?questionId=S1`)
+                      .card-header.bg-white
+                        h5 ¿Cuáles son los requisitos para realizar una cancelación anticipada del total de mi deuda?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=S2`)
+                      .card-header.bg-white
+                        h5 ¿Cuáles son los requisitos para realizar una cesión?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=S3`)
+                      .card-header.bg-white
+                        h5 ¿Cuáles son los requisitos para realizar un refinanciamiento?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=S4`)
+                      .card-header.bg-white
+                        h5 ¿A partir de cuándo puedo gestionar mi minuta? ¿Cuáles son los requisitos?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=S5`)
+                      .card-header.bg-white
+                        h5 Se me perdió mi contrato, deseo una copia, ¿Cómo hago?
+                  a.carousel-control-prev(href='#carouselExampleIndicators2' role='button' data-slide='prev')
+                    span.carousel-control-prev-icon(aria-hidden='true' style='background-color:#008533')
+                    span.sr-only Previous
+                  a.carousel-control-next(href='#carouselExampleIndicators2' role='button' data-slide='next')
+                    span.carousel-control-next-icon(aria-hidden='true' style='background-color:#008533')
+                    span.sr-only Next
+              .card-body.display-none#carrousel3
+                #carouselExampleIndicators1.carousel.slide(data-ride='carousel')
+                  .carousel-inner#carrousel2(role='listbox')
+                    A.carousel-item.active.px-5(href=`/preguntas-frecuentes?questionId=R1`)
+                      .card-header.bg-white
+                        h5 No me ha llegado el preventivo de cobranzas ¿Dónde debo de pagar mi cuota?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=R2`)
+                      .card-header.bg-white
+                        h5 ¿Cuánto es la mora diaria por cada día de impago? ¿A base de qué se calcula?
+                    a.carousel-item.px-5(href=`/preguntas-frecuentes?questionId=R3`)
+                      .card-header.bg-white
+                        h5 Si quiero utilizar el libro de reclamaciones, ¿Dónde lo hago?
+                  a.carousel-control-prev(href='#carouselExampleIndicators1' role='button' data-slide='prev')
+                    span.carousel-control-prev-icon(aria-hidden='true' style='background-color:#008533')
+                    span.sr-only Previous
+                  a.carousel-control-next(href='#carouselExampleIndicators1' role='button' data-slide='next')
+                    span.carousel-control-next-icon(aria-hidden='true' style='background-color:#008533')
+                    span.sr-only Next
+
+      #request-right-side.col-lg-8
+        .card.card-outline-info
+          .card-header
+            h4.mb-0.text-white Consulta
+          .card-body
+            form.form-box(method='post' enctype='multipart/form-data')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .row
+                .col-md-12.form-group
+                  p Por favor seleccione hacia que canal de atención desea dirigir su consulta:
+                .col-md-6.form-group
+                  select#typeConsult.form-control.select2(name='typeConsult' onChange='changeQuestions(this)' required)
+                    option(value='' selected disabled hidden) -- Tipo de atención --
+                    option(value=0) Consulta de Atención al Cliente
+                    option(value=1) Consulta de Cobranzas
+                    option(value=2) Otras consultas
+              .row
+                .col-md-6.form-group
+                  select#nameProject.form-control.select2(name='projectId' v-model='projectId' required)
+                    option(value='' selected disabled hidden) -- Nombre del proyecto --
+                    option(v-for='project in projects' :value='project.id') {{ project.name }}
+                .col-md-6.form-group
+                  input(type='hidden' name='budgetId' v-model='budgetId' required)
+                  select#typeProduct.form-control.select2(name='contractNum' v-model='contractNum' required)
+                    option(value='' selected disabled hidden) -- Número de contrato --
+                    option(v-for='budget in filteredBudgets' :value='budget.contractNum') {{ budget.contractNum }}
+              .row
+                .col-md-6.form-group
+                  input#email.form-control.form-value(name='email' placeholder='Correo electrónico' value=user.email type='email' required)
+                .col-md-6.form-group
+                  input#phone.form-control.form-value(name='phone' maxlength='9' oninput="this.value=this.value.replace(/[^0-9]/g,'');" placeholder='Teléfono ' type='text' value=user.profile.mainTelephone required)
+              .row
+                .col-md-12.form-group
+                  input#subject.form-control.form-value(name='subject' placeholder='Asunto' type='text' required)
+              hr
+              .row: .col-md-12
+                textarea#messagge.form-control.form-value(name='detail'  rows='4' placeholder='Mensaje' required)
+              .row
+                .col-md-12.d-flex.justify-content-end.text-primary2
+                  input.align-self-center.d-none(type='file', name='file' id='file')
+                  label(for='file') 
+                    strong Añadir adjunto
+                    i.mdi.mdi-file-document(style='font-size:2em; margin-left:8px')
+              hr
+              .row: .col-md-12
+                button.btn.btn-primary.float-right(type='submit')
+                  i.fa.fa-envelope-o
+                  | Enviar consulta
+
+  script(src='/js/vue/requests/create.js?v=0.0.2' defer)
+
+  script.
+    function changeQuestions(select) {
+      const questiontitle = document.getElementById('questiontitle');
+      const carrousel1 = document.getElementById('carrousel1');
+      const carrousel2 = document.getElementById('carrousel2');
+      const carrousel3 = document.getElementById('carrousel3');
+      switch (select.value) {
+        case '0':
+          questiontitle.textContent  = 'Consultas Frecuentes';
+          carrousel1.style.display = 'block';
+          carrousel2.style.display = 'none';
+          carrousel3.style.display = 'none';
+        break;
+        case '1':
+          questiontitle.textContent  = 'Consultas Frecuentes'
+          carrousel1.style.display = 'none';
+          carrousel2.style.display = 'block';
+          carrousel3.style.display = 'none';
+        break;
+        case '2':
+        break;
+        case '3':
+          questiontitle.textContent  = 'Consultas Frecuentes'
+          carrousel1.style.display = 'none';
+          carrousel2.style.display = 'none';
+          carrousel3.style.display = 'block';
+        break;
+      }
+    }

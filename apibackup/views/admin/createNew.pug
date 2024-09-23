@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+        .pb-2.mb-4.mt-5.border-bottom.section-white
+          h2.title-primary2 Crear Novedad
+        form#answer-form(method='POST' enctype="multipart/form-data")
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='title') Título
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='title') Título
+            .col-md-7
+              input#title.form-control(type='text', name='title' required)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='subTitle') Subtítulo
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='subTitle') Subtítulo
+            .col-md-7
+              input#subTitle.form-control(type='text', name='subTitle' required)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='content') Contenido
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='content') Contenido
+            .col-md-7
+              textarea.tiny(name='content') 
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right Imagen
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left Imagen
+            .col-md-3
+              img.uploadimage(id=`image` src=("http://placehold.it/900x500") alt='img',  width='100%', style="object-fit: cover; cursor:pointer;" preview=`image` url=`hidden_url`)
+              input(id=`hidden_url` type="hidden" name="image" required)
+            .col-md-4.d-flex.align-items-center
+              Strong.text-danger * Resolución sugerida 900px X 500px
+          .form-group.row.align-items-center
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='file') Subir Archivo
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='file') Subir Archivo
+            .col-md-7
+              input.form-control(type='file', name='file'  id='file')
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='link') Link de referencia
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='link') Link de referencia
+            .col-md-7
+              input#link.form-control(type='text', name='link')
+              Strong.text-danger * No olvidar anteponer 'https://' o 'http://'
+          .form-group
+            .offset-sm-3.col-md-7.pl-2
+              button.btn.btn-success(type='submit')
+                i.fas.fa-lock.fa-sm.mr-2
+                | Crear

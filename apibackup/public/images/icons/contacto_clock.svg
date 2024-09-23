@@ -1,0 +1,12 @@
+<svg id="contacto_clock" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Grupo_96" data-name="Grupo 96">
+    <g id="Grupo_95" data-name="Grupo 95">
+      <path id="Trazado_112" data-name="Trazado 112" d="M12,0A12,12,0,1,0,24,12,12,12,0,0,0,12,0Zm.515,22.945V20.834a.515.515,0,1,0-1.03,0v2.111a10.965,10.965,0,0,1-10.43-10.43H3.166a.515.515,0,1,0,0-1.03H1.055a10.965,10.965,0,0,1,10.43-10.43V3.166a.515.515,0,1,0,1.03,0V1.055a10.965,10.965,0,0,1,10.43,10.43H20.834a.515.515,0,1,0,0,1.03H22.95A10.965,10.965,0,0,1,12.515,22.945Z" fill="#acd313"/>
+    </g>
+  </g>
+  <g id="Grupo_98" data-name="Grupo 98" transform="translate(11.757 6.474)">
+    <g id="Grupo_97" data-name="Grupo 97">
+      <path id="Trazado_113" data-name="Trazado 113" d="M184.013,104.444l-4.575-4.651V94.959a.479.479,0,1,0-.958,0v5.03a.479.479,0,0,0,.139.335l4.709,4.79a.479.479,0,1,0,.685-.671Z" transform="translate(-178.48 -94.48)" fill="#acd313"/>
+    </g>
+  </g>
+</svg>

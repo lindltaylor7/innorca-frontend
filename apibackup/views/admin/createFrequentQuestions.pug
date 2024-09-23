@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid: .row: .col-12
+      form(method='post')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .card.pt-4
+          h3.title-primary2.card-title.text-center Crear pregunta frecuente
+          .card-body
+            .form-group.d-flex.flex-column.flex-md-row.align-items-start.align-items-md-center
+              label.my-0 Seleccionar categoría
+              .m-2
+              select.form-control.w-100.w-md-25(name='category' required)
+                option(value='no-category' selected disabled hidden) -- categoría --
+                each questionCategory in questionCategories
+                  option(value=`${questionCategory._id}`) #{questionCategory.name}
+            .form-group.row
+              .col-12
+                label.mr-4.pb-2 Ingresa la pregunta
+              .col-12
+                input.form-control(type='text' name='question' required)
+            .form-group.row
+              .col-12
+                label.mr-4.pb-2 Ingresa la respuesta
+              .col-12
+                textarea.tiny-frequent-question(name='answer')
+            .form-group.text-end
+              button.btn.btn-primary(type='submit') Crear

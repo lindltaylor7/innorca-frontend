@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid#all-news
+      .row
+        .col-xl-3.col-lg-3.col-md-6.col-sm-6.col-12(v-if='posts !== null' v-for="(post, index) in posts" :key="index")
+          .card
+            img.card-img-top.img-fluid(:src=`post.image?post.image:'/assets/images/big/img4.jpg'` style="object-fit: cover;height: 210px;" alt='Card image cap')
+            .card-body(style="min-height: 250px;display: flex;flex-flow: column;")
+              .d-flex.no-block.align-items-center.mb-3
+                span
+                  i.ti-calendar
+                  |  {{post.createdAt}}
+              h3(style="min-height: 57.6px;display:flex; align-items:center") {{trunk(post.title)}}
+              h6.text-muted.mb-0.mt-2(style="min-height: 57.6px;display:flex; align-items:center") {{trunk2(post.subTitle)}}
+              a.btn.btn-success.btn-rounded.waves-effect.waves-light.mt-auto(style="width: max-content;" :href=`'/noticias/'+post._id`) Continuar leyendo
+        .col-12
+          h3.mt-5.mb-5.text-center(v-if="posts.length==0") No se encontraron novedades
+          h3.mt-5.mb-5.text-center(v-if="isProcessing") Cargando ...
+      .col-12(align='center').form-actions.text-right
+        a.mr-2.btn.btn-primary.back-btn(v-if="page > 1" @click.prevent=`getOtherNews($event, 'noType', 'false')`) Atrás
+        a.mr-2.btn.btn-secondary.text-white.back-btn(v-else) Atrás
+        a.btn.btn-primary(v-if="total_pages > page" @click.prevent=`getOtherNews($event, 'noType', 'true')`) Ver más
+        a.btn.btn-secondary.text-white(v-else) Ver más

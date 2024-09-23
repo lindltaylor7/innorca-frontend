@@ -1,0 +1,91 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body
+        .row.border-bottom.mb-3
+          .col-md-5.d-none.d-md-block.text-right
+            h3 Información de usuario
+          .col-md-5.d-block.d-md-none.text-left
+            h3 Información de usuario
+        form(action='/account/profile', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Nombre
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Nombre
+            .col-md-7
+              input.form-control(type='text', value=user.profile.name, readonly)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Correo
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='email') Correo
+            .col-md-7
+              input.form-control(type='email', value=user.profile.sperantEmail, readonly)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='phone') Teléfono
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='phone') Teléfono
+            .col-md-7
+              input.form-control(type='text',value=user.profile.mainTelephone, readonly)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='docType') Tipo de documento
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='docType') Tipo de documento
+            .col-md-7
+              input.form-control(type='text', value=user.profile.docType, readonly)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='numType') Número de documento
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='numType') Número de documento
+            .col-md-7
+              input.form-control(type='text', value=user.profile.document, readonly)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='recEmail') Correo de recuperación
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='recEmail') Correo de recuperación
+            .col-md-7
+              input.form-control(type='text',  name="email" value=user.email)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='recPhone') Teléfono de respaldo
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='recPhone') Teléfono de respaldo
+            .col-md-7
+              input.form-control(type='text', name="secondaryTelephone", value=user.profile.secondaryTelephone, placeholder="Teléfono de respaldo", maxlength="15" oninput="this.value=this.value.replace(/[^0-9()+]/g,'');")
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='address') *Dirección actual
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='address') *Dirección actual
+            .col-md-7
+              input.form-control#search(type='text', name="address",value=user.profile.address placeholder="Dirección" )
+              p.disclaimer *Esta dirección no modifica la actualmente especificada en su compromiso de contrato (Revisar términos y condiciones)
+              input#lat(type='hidden' value=user.profile.point?user.profile.point.coordinates[1]:-12.0459985 name="lat")
+              input#long(type='hidden' value=user.profile.point?user.profile.point.coordinates[0]:-77.0327345 name="long")
+              .mymap.mt-3
+                #myMapEdit.map
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='reference') Referencia
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='reference') Referencia
+            .col-md-7
+              input.form-control(type='text', name="reference", value=user.profile.reference, placeholder="Referencia")    
+          .row
+            .col-md-12(align="center")
+              .text-right.form-group.offset-md-3.col-md-7.pl-2
+                button.btn.btn-primary(type='submit')
+                  i.fas.fa-pencil-alt.fa-sm.mr-1
+                  | Actualizar perfil
+        .row.border-bottom.mb-3
+          .col-md-3.text-right
+            h3 Cambiar contraseña
+        form(action='/account/password', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='password') Nueva contraseña
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='password') Nueva contraseña
+            .col-md-7
+              input.form-control(type='password', name='password', id='password', autocomplete='new-password', minlength='8', required)
+          .form-group.row
+            label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirmPassword') Confirmar contraseña
+            .col-md-7
+              input.form-control(type='password', name='confirmPassword', id='confirmPassword', autocomplete='new-password', minlength='8', required)
+          .row
+            .col-md-12(align="center")
+              .text-right.form-group.offset-md-3.col-md-7.pl-2
+                button.btn.btn-primary(type='submit')
+                  i.fas.fa-lock.fa-sm.mr-1
+                  | Cambiar contraseña
+  script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_API_KEY}&callback=initMap&libraries=geometry,places&v=weekly` defer="")
+  script(src="/js/maps.js")

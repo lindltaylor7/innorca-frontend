@@ -1,0 +1,94 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body: .row.justify-content-center
+        .col-md-8
+          .row
+            .col-12
+              .form-group
+                h1.text-primary2 Solicitud
+            .col-12
+                .d-inline-block.text-primary2.pr-1 Nombre del proyecto:
+                .d-inline-block #{request.nameProject}
+            .col-12
+              .d-inline-block.text-primary2.pr-1 Tipo de atención:
+              case (request.typeConsult)
+                when 0
+                  .d-inline-block Consulta de Atención al Cliente
+                when 1
+                  .d-inline-block Consulta de Cobranzas
+                when 2
+                  .d-inline-block Otras consultas
+                when 3
+                  .d-inline-block Sugerencias
+            .col-12
+              .d-inline-block.text-primary2.pr-1 Asunto:
+              .d-inline-block Trámite
+            .col-12
+              .d-inline-block.text-primary2.pr-1 Fecha de creación:
+              .d-inline-block #{moment(request.createdAt).format('DD/MM/YYYY')}
+            .col-12
+              .d-inline-block.text-primary2.pr-1 Estado:
+              case (request.status)
+                when 0
+                  .d-inline-block Sin responder
+                when 1
+                  .d-inline-block Respondido
+                when 2
+                  .d-inline-block Cerrado
+            .col-12.mt-3
+              .text-primary2 Trámite solicitado:
+              textarea.form-control.h-6rem(placeholder=`${request.detail}` readOnly)
+              if (request.fileUrl)
+                .d-flex.justify-content-end.mt-2
+                  a.d-flex.align-items-center(href=`${request.fileUrl}` target="_blank") 
+                    strong #{request.fileName}
+                    i.mdi.mdi-file-document(style='font-size:2em; margin-left:8px')
+              hr
+          .row.mt-2
+            .col-12.mb-3
+              h3 Respuestas
+            .col-12
+              each comment, index in comments
+                .row
+                  .col-md-6: .d-flex.mb-2
+                    if (comment.userType === 0)
+                      if (comment.name)
+                        strong.pr-1 Atendido por:
+                        div #{comment.name}
+                  .col-md-6: .d-flex.justify-content-md-end
+                    strong.pr-1 Fecha:
+                    .mb-2 #{moment(comment.createdAt).format('LLLL')}
+                  .col-12
+                    textarea.form-control.form-value.h-6rem(placeholder=`${comment.content}` readonly )
+                    if (comment.fileUrl)
+                      .d-flex.justify-content-end.mt-2
+                        a.d-flex.align-items-center(href=`${comment.fileUrl}` target="_blank") 
+                          strong Archivo adjunto
+                          i.mdi.mdi-file-document(style='font-size:2em; margin-left:8px')
+                    hr
+          form.mt-4.form-box#answer-form(method='post' enctype='multipart/form-data')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .row.mt-4
+              .col-12
+                h3 Escribir respuesta
+              .col-12
+                if request.status !== 2
+                  textarea.form-control.form-value.h-6rem(name='content'  rows='4' placeholder='Escribir una respuesta' required)
+                  .d-flex.justify-content-end.text-primary2
+                    input.align-self-center.d-none(type='file', name='file' id='file' placeholder='', style='')
+                    label(for='file') 
+                      strong Añadir adjunto
+                      i.mdi.mdi-file-document(style='font-size:2em; margin-left:8px')
+                  .form-actions: .text-right.pt-2
+                    button.btn-sm.btn.bkg-primary.text-white(type='submit')
+                      | Enviar respuesta
+  //- script.
+  //-   $(document).ready(function(){
+  //-       $('input[type="file"]').change(function(e){
+  //-           var fileName = e.target.files[0].name;
+  //-           alert('The file "' + fileName +  '" has been selected.');
+  //-       });
+  //-   });

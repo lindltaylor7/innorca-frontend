@@ -1,0 +1,316 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Cotizar un nuevo proyecto de construcción
+        .card-subtitle
+          p.d-inline-block En esta sección podrá cotizar sus nuevos proyectos, y estimar los costos los materiales a utilizar.
+          hr
+          form(method='POST')#quoteClient.mt-4
+            input(type='hidden', name='_csrf', value=_csrf)
+            .row: .col-10.offset-1
+              .row.float-left.my-2
+                div
+                  button.btn.btn-default(v-if='step==1 || step==3' @click.prevent="prevStep") Volver
+                  button.btn.btn-default(v-if='step==2' @click.prevent="prevStep") Editar
+                  button.btn.btn-primary(v-if='step<2 && step!=0' @click.prevent="nextStep" :disabled=`flag`) Cotizar
+                  button.btn.btn-primary(v-if='step==2 || step==3') Guardar
+            .col-8.offset-2(v-if='step==0')
+              .row.form-group
+                .col-md-8.d-flex.align-items-center
+                  strong.text-primary2 1. ¿Qué desea construir?
+                .col-md-4.my-2
+                  select.select2.form-control.border-primary2(v-model="clientForm.constructionType" name="constructionSelect" required)
+                    option(value="" selected disabled) --Seleccionar--
+                    option(value="Casa de 1 o 2 pisos") Casa de 1 o 2 pisos
+                    option(value="Edificio de 3 pisos a más") Edificio de 3 pisos a más
+                    option(value="Local comercial") Local comercial
+                .col-md-8.d-flex.align-items-center
+                  strong.text-primary2 2. ¿Cuándo desea empezar a construir?
+                .col-md-4.my-2
+                  select.select2.form-control.border-primary2(v-model="clientForm.constructionDate" name="dateSelect" required)
+                    option(value="" selected disabled) --Seleccionar--
+                    option(value="Lo antes posible") Lo antes posible
+                    option(value="En 6 meses") En 6 meses
+                    option(value="Solo estoy bucando información de precios") Solo estoy bucando información de precios
+                .col-md-8.d-flex.align-items-center
+                  strong.text-primary2 3. ¿Desea recibir asesoría en construcción?
+                .col-md-4.my-2
+                  .row.d-flex.justify-content-around
+                    .col-6.col-sm-6.col-md-6.col-lg-5.text-center
+                      input.radio.mr-2(type="radio" :value="true" v-model="clientForm.counseling" name="counselingCheckbox") 
+                      | Sí
+                    .col-6.col-sm-6.col-md-6.col-lg-5.text-center
+                      input.radio.mr-2(type="radio" :value="false" v-model="clientForm.counseling" name="counselingCheckbox") 
+                      | No 
+            .col-8.offset-2(v-if='step==1')
+              .row.form-group( v-for="(p,index) in project" :key="index" @delete="project" index="index")
+                .col-md-8.d-flex.align-items-center
+                  strong.text-primary2 Indique en qué piso desea realizar su construcción
+                .col-md-4.my-2
+                  select.select2.form-control.border-primary2(v-model="project[index].floor" name="floor" @change="getQuote(index)" required)
+                    option(value="" selected disabled) --Seleccionar--
+                    option(value="Primer piso") Primer piso
+                    option(value="Segundo piso") Segundo piso
+                    option(value="Tercer piso y Azotea") Tercer piso y azotea
+                .col-md-8.d-flex.align-items-center
+                  strong.text-primary2 Mencione el tipo de ambiente que desea construir
+                .col-md-4.my-2
+                  select.select2.form-control.border-primary2(v-model="project[index].roomType" name="roomType" required)
+                    option(value="" selected disabled) --Seleccionar--
+                    option(value="Dormitorio") Dormitorio
+                    option(value="Sala") Sala
+                    option(value="Comedor") Comedor
+                    option(value="Baño") Baño
+                    option(value="Cocina") Cocina
+                .col-md-8.d-flex.align-items-center
+                  strong.text-primary2 Indique el largo del espacio a construir
+                .col-md-4.my-2
+                  select.select2.form-control.border-primary2(v-model="project[index].size1" name="size1" @change="getSize2(index)" required)
+                    option(value="" selected disabled) --Seleccionar--
+                    option(value="1.5") 1.5m
+                    option(value="2") 2m
+                    option(value="3") 3m
+                    option(value="4") 4m
+                    option(value="5") 5m
+                    option(value="6") 6m
+                    option(value="7") 7m
+                    option(value="8") 8m
+                    option(value="9") 9m
+                .col-md-8.d-flex.align-items-center
+                  strong.text-primary2 Indique el ancho del espacio a construir
+                .col-md-4.my-2
+                  select.select2.form-control.border-primary2(v-model="project[index].size2" name="size2" @change="getQuote(index)" required)
+                    option(value="" selected disabled) --Seleccionar--
+                    option(:value="size" v-for="(size, index) in size2[index]") {{size}}m
+                .col-md-8.d-flex.align-items-center
+                  strong.text-primary2 Costo total referencial
+                .col-md-4.my-2
+                  strong.text-primary2 S/{{formatMoneyFaik(project[index].finalPrice)}}
+                .col-md-12.my-2
+                  .row.justify-content-end
+                    button.btn.btn-primary.mx-1(@click.prevent="addProject") Agregar ambiente
+                    button.btn.btn-default.mx-1(v-if="project.length>1" @click.prevent="deleteProject(index)") Eliminar ambiente
+
+            .col-12(v-if='step==2')
+              .row.forw-group
+                .col-12(style="display: none")
+                  .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-lg-none.text-rigth
+                    .col-auto.pl-1
+                      strong.text-primary.m-0 Ver más
+                    .col-auto.pr-1
+                      img.ml-2(src="/images/arrow.png", width="25px", alt="")
+                  .row.d-flex.justify-content-center
+                    input(type="hidden" name="projectsNum" :value='project.length')
+                    input(type="hidden" name="startDate" :value='clientForm.constructionDate')
+                    input(type="hidden" name="projectType" :value='clientForm.constructionType')
+                    input(type="hidden" name="counseling" :value='clientForm.counseling')
+                    .table-responsive-lg.mt-4(v-for="(p,index) in project")
+                      input(type="hidden" name="location" :value='p.floor')
+                      input(type="hidden" name="roomType" :value='p.roomType')
+                      input(type="hidden" name="long" :value='p.size1')
+                      input(type="hidden" name="width" :value='p.size2')
+                      table.table
+                        thead
+                          tr.bkg-primary.text-white
+                            th(colspan=7).text-center 
+                              h3.text-white.mb-0 Proyecto: {{p.roomType||"Nombre del proyecto"}} / Piso: {{p.floor || "Piso"}} 
+                          tr.bkg-primary.text-white
+                            th(scope='col') #
+                            th(scope='col' style="min-width:403px;") MATERIALES EN CANTIDADES Y UNIDADES COMERCIALES
+                            th(scope='col') CANTIDAD
+                            th(scope='col') UNIDAD
+                            th(scope='col') PRECIO
+                            th(scope='col') COSTO PARCIAL
+                        tbody
+                          tr(v-if='p.quoteMaterials.length != 0' v-for="(m,i) in p.quoteMaterials")
+                            th.text-left {{i+1}}
+                              input(type="hidden" name="index" :value='i+1')
+                            th(v-if='materials[i]') {{materials[i]}}
+                              input(type="hidden" name="name" :value='materials[i]')
+                            th(v-if='p.quoteMaterials[i]>=0').text-left  {{p.quoteMaterials[i]}}
+                              input(type="hidden" name="quantity" :value='p.quoteMaterials[i]')
+                            th(v-if='units[i]').text-left  {{units[i]}}
+                              input(type="hidden" name="unit" :value='units[i]')
+                            th(v-if='prices[i]').text-left  S/{{formatMoney(prices[i])}}
+                              input(type="hidden" name="price" :value='formatMoney(prices[i])')
+                            th(v-if='p.quoteMaterials[i]>=0 && prices[i]').text-left  S/{{formatMoney(p.quoteMaterials[i]*prices[i])}}
+                              input(type="hidden" name="parcialCost" :value='formatMoney(p.quoteMaterials[i]*prices[i])')
+                          tr.bkg-primary.text-white 
+                            th(colspan=5).text-center 
+                              h3.text-white.mb-0 COSTO TOTAL
+                            th(v-if='p.finalPrice').text-left  
+                              h3.text-white.mb-0 S/{{formatMoney(p.finalPrice)}}
+                              input(type="hidden" name="totalCost" :value='formatMoney(p.finalPrice)') 
+                              input(type="hidden" name="totalCostPrice" :value='p.finalPrice')   
+                                
+                  .row.d-flex.justify-content-center
+                    .table-responsive-lg.mt-4 
+                      table.table.table-bordered
+                        tbody
+                          tr.bkg-primary.text-white 
+                            th(colspan=5).text-center 
+                              h3.text-white.mb-0 COSTO FINAL
+                            th(v-if='totalCost').text-left  
+                              h3.text-white.mb-0 S/{{formatMoney(totalCost)}} 
+                              input(type="hidden" name="finalCost" :value='formatMoney(totalCost)') 
+                              input(type="hidden" name="totalCostNumber" :value='totalCost') 
+                .col-12
+                  .row.align-content-center.justify-content-center.border-primary2.p-3.mb-1(v-for="(p,index) in project")
+                    .col-6
+                      h2.text-center.text-primary.mb-0 Proyecto: {{p.roomType||"Nombre del proyecto"}} / Piso: {{p.floor || "Piso"}} 
+                      .p-5.text-center
+                        h3.text-primary2 Costo de construcción por m
+                          sup 2
+                          |: S/{{formatMoneyFaik(areaPrice(p))}}
+                        h2.text-primary2.text-center Costo Total: S/{{formatMoneyFaik(p.finalPrice)}}
+                        span Costo referencial, revisar condiciones dentro del detalle
+                        br
+                        button.text-center.btn.btn-primary.mt-2( @click.prevent="getDetail(index)") Ver detalle
+                    .col-6.d-flex.align-content-center.justify-content-center
+                      .border-primary2(v-if=" p.roomType == 'Sala' ")
+                        img(src="/images/sala.jpeg" style="height:250px")
+                      .border-primary2(v-if=" p.roomType == 'Dormitorio' " )
+                        img(src="/images/dormitorio.jpeg" style="height:250px")
+                      .border-primary2(v-if=" p.roomType == 'Cocina' " )
+                        img(src="/images/cocina.jpeg" style="height:250px")
+                      .border-primary2(v-if=" p.roomType == 'Baño' " )
+                        img(src="/images/baño.jpeg" style="height:250px")
+                      .border-primary2(v-if=" p.roomType == 'Comedor' " )
+                        img(src="/images/comedor.jpeg" style="height:250px")
+            .col-12(v-if='step==3' )
+              .row.form-group
+                .col-12(style="display: none")
+                  .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-lg-none.text-rigth
+                    .col-auto.pl-1
+                      strong.text-primary.m-0 Ver más
+                    .col-auto.pr-1
+                      img.ml-2(src="/images/arrow.png", width="25px", alt="")
+                  .row.d-flex.justify-content-center
+                    input(type="hidden" name="projectsNum" :value='project.length')
+                    input(type="hidden" name="startDate" :value='clientForm.constructionDate')
+                    input(type="hidden" name="projectType" :value='clientForm.constructionType')
+                    input(type="hidden" name="counseling" :value='clientForm.counseling')
+                    .table-responsive-lg.mt-4(v-for="(p,index) in project")
+                      input(type="hidden" name="location" :value='p.floor')
+                      input(type="hidden" name="roomType" :value='p.roomType')
+                      input(type="hidden" name="long" :value='p.size1')
+                      input(type="hidden" name="width" :value='p.size2')
+                      table.table
+                        thead
+                          tr.bkg-primary.text-white
+                            th(colspan=7).text-center 
+                              h3.text-white.mb-0 Proyecto: {{p.roomType||"Nombre del proyecto"}} / Piso: {{p.floor || "Piso"}} 
+                          tr.bkg-primary.text-white
+                            th(scope='col') ÍNDICE
+                            th(scope='col' style="min-width:403px;") MATERIALES EN CANTIDADES Y UNIDADES COMERCIALES
+                            th(scope='col') CANTIDAD
+                            th(scope='col') UNIDAD
+                            th(scope='col') PRECIO
+                            th(scope='col') COSTO PARCIAL
+                        tbody
+                          tr(v-if='p.quoteMaterials.length != 0' v-for="(m,i) in p.quoteMaterials")
+                            th.text-left {{i+1}}
+                              input(type="hidden" name="index" :value='i+1')
+                            th(v-if='materials[i]') {{materials[i]}}
+                              input(type="hidden" name="name" :value='materials[i]')
+                            th(v-if='p.quoteMaterials[i]>=0').text-left  {{p.quoteMaterials[i]}}
+                              input(type="hidden" name="quantity" :value='p.quoteMaterials[i]')
+                            th(v-if='units[i]').text-left  {{units[i]}}
+                              input(type="hidden" name="unit" :value='units[i]')
+                            th(v-if='prices[i]').text-left  S/{{formatMoney(prices[i])}}
+                              input(type="hidden" name="price" :value='formatMoney(prices[i])')
+                            th(v-if='p.quoteMaterials[i]>=0 && prices[i]').text-left  S/{{formatMoney(p.quoteMaterials[i]*prices[i])}}
+                              input(type="hidden" name="parcialCost" :value='formatMoney(p.quoteMaterials[i]*prices[i])')
+                          tr.bkg-primary.text-white 
+                            th(colspan=5).text-center 
+                              h3.text-white.mb-0 COSTO TOTAL
+                            th(v-if='p.finalPrice').text-left  
+                              h3.text-white.mb-0 S/{{formatMoney(p.finalPrice)}}
+                              input(type="hidden" name="totalCost" :value='formatMoney(p.finalPrice)')     
+                              input(type="hidden" name="totalCostPrice" :value='p.finalPrice')                             
+                .col-12
+                  .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-lg-none.text-rigth
+                    .col-auto.pl-1
+                      strong.text-primary.m-0 Ver más
+                    .col-auto.pr-1
+                      img.ml-2(src="/images/arrow.png", width="25px", alt="")
+                  .row.d-flex.justify-content-center
+                    .table-responsive-lg.mt-4
+                      table.table
+                        thead
+                          tr.bkg-primary.text-white
+                            th(colspan=7).text-center 
+                              h3.text-white.mb-0 Proyecto: {{detail.roomType||"Nombre del proyecto"}} / Piso: {{detail.floor || "Piso"}} 
+                          tr.bkg-primary.text-white
+                            th.strong(scope='col') #
+                            th.strong(scope='col' style="min-width:403px;") MATERIALES EN CANTIDADES Y UNIDADES COMERCIALES
+                            th.strong(scope='col') CANTIDAD
+                            th.strong(scope='col') UNIDAD
+                            th.strong(scope='col') PRECIO UNITARIO
+                            th.strong(scope='col') TOTAL
+                        tbody
+                          tr.nohover(v-if='detail.quoteMaterials.length != 0' v-for="(m,i) in detail.quoteMaterials")
+                            th.text-center {{i+1}}
+                            th(v-if='materials[i]') {{materials[i]}}
+                            th(v-if='detail.quoteMaterials[i]>=0').text-center {{detail.quoteMaterials[i]}}
+                            th(v-if='units[i]').text-center  {{units[i]}} 
+                            th(v-if='prices[i]').text-center S/{{formatMoney(prices[i])}}
+                            th(v-if='detail.quoteMaterials[i]>=0 && prices[i]').text-center S/{{formatMoney(detail.quoteMaterials[i]*prices[i])}}
+                          tr.nohover2.bkg-primary.text-white 
+                            th(colspan=6).text-center
+                              .col-12
+                                .row.d-flex.justify-content-between 
+                                  h3.text-white.mb-0 COSTO TOTAL
+                                  h3.text-white.mb-0 S/{{formatMoneyFaik(detail.finalPrice)}}           
+                  .row.d-flex.justify-content-center
+                    .table-responsive-lg.mt-4 
+                      table.table.table-bordered
+                        tbody
+                          tr.bkg-primary.text-white 
+                            th(colspan=6 v-if='totalCost').text-center 
+                              .col-12
+                                .row.d-flex.justify-content-between 
+                                  h3.text-white.mb-0 COSTO FINAL
+                                  h3.text-white.mb-0 S/{{formatMoneyFaik(totalCost)}} 
+                                  input(type="hidden" name="finalCost" :value='formatMoney(totalCost)') 
+                                  input(type="hidden" name="totalCostNumber" :value='totalCost') 
+                .col-12.col-xl-6.offset-xl-3.col-lg-6.offset-lg-3.col-md-8.offset-md-2
+                  .card.mt-4 
+                    .card-body
+                      .card-title.text-center
+                        h4.title-primary2  ¡MUY IMPORTANTE!
+                      .card-subtitle.text-center
+                        h5  Antes de contruir recuerda que:
+                      .card-text
+                        ul
+                          li  Realizar una buena mezcla y vaciado nos ayudará a evitar burbujas de aire en las losas, columnas y vigas, con esto evitaremos caer en costos adicionales en la compra de aditivos para solucionar cangrejeras.
+                          li  Es recomendable utilizar una vibradora eléctrica para garantizar el movimiento que eliminará las burbujas de aire en la mezcla.
+                          li  Los muros de contención o pircas deben estar bien asentados para evitar deslizamientos futuros. /Una buena cimentación puede asegurar tu construcción y los pisos futuros que quieras construir. Las vigas y columnas siempre deben de estar unidas.
+                          li  Estudio de la calidad de suelo te puede y te sirve para saber la forma de segura de construir tu hogar.
+                  .table-responsive.mt-4 
+                    table.table.table-bordered
+                      thead
+                        tr.bkg-primary.text-white
+                          th(scope='col') NOTA IMPORTANTE
+                      tbody 
+                        tr.nohover
+                          th Todos los costos son referenciales y no incluye IGV.
+                        tr.nohover
+                          th Los precios fueron actualizados y modificados de acuerdo a la mano de obra y materiales en Lima Metropolitana y Callao, conforme a lo publicado, en la revista especializada para construcción COSTOS del año 2019 y su pagina web: 
+                            a(href="https://costosperu.com/PortalSuscriptores/Partidas" target="_blank") Costos Perú
+                        tr.nohover
+                          th Es importante mencionar que no se contemplan en estos costos los precios de las instalaciones sanitarias y electricas, estas se definiran por punto instalado por el mismo usuario.
+                        tr.nohover
+                          th Es importante contemplar sobre el costo final un 20% adicional para mantener un margen según el mercado.
+            .col-8.offset-2
+              .row.float-right
+                div
+                  button.btn.btn-default(v-if='step==1 || step==3' @click.prevent="prevStep") Volver
+                  button.btn.btn-primary(v-if='step==0' @click.prevent="nextStep") Siguiente
+                  button.btn.btn-default(v-if='step==2' @click.prevent="prevStep") Editar
+                  button.btn.btn-primary(v-if='step<2 && step!=0' @click.prevent="nextStep" :disabled=`flag`) Cotizar
+                  button.btn.btn-primary(v-if='step==2 || step==3') Guardar

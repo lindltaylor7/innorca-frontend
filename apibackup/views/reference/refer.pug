@@ -1,0 +1,74 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body: .row.justify-content-center
+        .col-md-6: .row.justify-content-center
+          .col-12
+            .card-title
+              h2.title-primary2 Añadir referido
+            .card-subtitle 
+              p En Menorca valoramos tu preferencia como cliente. Te incentivamos a seguir con nosotros a largo plazo. Si nos refieres a un amigo o familiar que esté interesado en alguna de nuestras propiedades y se concreta la compra, te harás acreedor a la suma de 500 soles, sin sorteos.
+          .col-12
+            form.form-material.mt-4(method='post')
+              .form-body
+                input(type='hidden', name='_csrf', value=_csrf)
+                .form-group
+                  label.text-primary2(for='name') Nombre del referido
+                  input.refer0.form-control(type='text' onKeyUp="fixP(this.value);" id='name' name='name' placeholder='Nombre' required)
+                .form-group
+                  label.text-primary2(for='lastname') Apellidos del referido
+                  input.refer1.form-control(type='text' onKeyUp="fixP(this.value);" id='lastname' name='lastname' placeholder='Apellidos' required)
+                .form-group
+                  label.text-primary2(for='dni') DNI
+                  input.refer2.form-control(type='text' onKeyUp="fixP(this.value);" id='dni' name='dni' oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxLength='8' placeholder='Número de documento' required)
+                .form-group
+                  label.text-primary2(for='email') Correo del referido
+                  input.refer3.form-control(type='email' onKeyUp="fixP(this.value);" id='email' name='email' placeholder='Correo' required)
+                .form-group
+                  label.text-primary2(for='phone') Teléfono del referido
+                  input.refer4.form-control(type='text' onKeyUp="fixP(this.value);" oninput="this.value=this.value.replace(/[^0-9()+]/g,'');" maxlength='15' id='phone' name='phone' placeholder='Teléfono' required)
+                .form-group
+                  label.text-primary2 Proyecto de interés
+                  select.select2.form-control.custom-in(class='multiselect' multiple="multiple" name='projectId' style=' height:36px' required)
+                    each p in projects
+                      option(value=`${p.id}`) #{p.name}
+                .form-group
+                  label.text-primary2.mb-2 Cuéntanos de tu referido
+                  textarea.refer5.form-control.h-6rem(onKeyUp="fixP(this.value);" name='comments')
+                .form-group.text-justify
+                  strong.text-primary2 * 
+                  span.text-justify Para poder ofrecerle a tu referido información más personalizada, nos ayudaría que nos puedas proporcionar algunos datos  adicionales como el motivo de su interés en el proyecto, su edad, estado civil,  situación laboral, lugar de residencia, tu relación o parentezco con el mismo, entre otros.
+                .w-100.my-1.d-flex.justify-content-start.align-items-center(style='font-size:0.9em; font-weight:400')
+                  input.mr-2(type="checkbox" value="Terms" required)
+                  p He leído y acepto los
+                    | 
+                    a.text-primary(href='https://ventanamenorca.s3.us-east-2.amazonaws.com/Te%CC%81rminos+y+condiciones+de+uso+de+la+plataforma+Ventana+Menorca.pdf' target='_blank')  Términos y Condiciones
+                .w-100.my-1.d-flex.justify-content-start.align-items-center(style='font-size:0.9em; font-weight:400')
+                  input.mr-2(type="checkbox" value="Terms" required)
+                  p He leído y acepto las
+                    | 
+                    a.text-primary(href='https://ventanamenorca.s3.us-east-2.amazonaws.com/Po%CC%81liticas+de+proteccio%CC%81n+de+datos.pdf' target='_blank')  Políticas de protección de datos
+              .form-actions: .text-right
+                button.btn.btn-primary(type='submit')
+                  i.fa.fa-envelope-o
+                  | Añadir referido
+                  //- select.select2.form-control.custom-in(class='multiselect' multiple="multiple" name='projectId' style=' height:36px' required)
+                    //- option(value='' hidden selected disabled) Proyecto de interés
+  
+  style.
+    .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+      background-color: #008533;
+    }
+
+    .select2-container--classic .select2-selection--multiple .select2-selection__choice, .select2-container--default .select2-selection--multiple .select2-selection__choice, .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+      background-color: #008533;
+    }
+
+  script.
+    function fixP() {
+      for(let i =0;i<6;i++){
+        $(`.refer${i}`).val($(`.refer${i}`).val().replace(/^ /,""));
+      }
+    }

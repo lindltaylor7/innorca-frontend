@@ -1,0 +1,47 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Mis referidos
+        .card-subtitle
+          .row
+            .col-12.d-flex.justify-content-between.align-items-center
+              p.d-inline-block En esta sección podrá ingresar nuevos referidos, y verificar el estado de tus anteriores ingresos para poder continuar su seguimiento.
+              a.btn.btn-primary.float-right(href='referir')
+                i.fas.fa-plus-circle
+                |  Añadir referido
+        .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-sm-none.mt-2
+          .col-auto.pl-1
+            strong.text-primary.m-0 Ver más
+          .col-auto.pr-1
+            img.ml-2(src="/images/arrow.png", width="25px", alt="")
+        .table-responsive.mt-4
+          table.table
+            thread: tr.bkg-primary.text-white
+              th(scope='col') Fecha de creación
+              th(scope='col') Nombre
+              th(scope='col') Teléfono
+              th(scope='col') Correo
+              th(scope='col') Estado
+            tbody
+              each reference in references
+                tr.cursor-pointer(onClick=`window.location = '/referido/detalles/${reference._id}'`)
+                  th(scope='row') #{ moment(new Date(reference.createdAt)).format("DD/MM/YYYY") }
+                  td #{reference.name}
+                  td #{reference.phone}
+                  td #{reference.email}
+                  -
+                    const statusesObject = {
+                      pending                    : 'Pendiente',
+                      deposit_payment_created    : 'Depósito',
+                      deposit_financial_created  : 'Depósito',
+                      process_separation_created : 'Separación',
+                      process_sale_completed     : 'En proceso de venta',
+                      process_canceled_created   : 'Desistió',
+                      reserv_created             : 'Reserva',
+                      reserv_canceled            : 'Reserva',
+                    }
+                  td #{ statusesObject[reference.sperantStatus] }

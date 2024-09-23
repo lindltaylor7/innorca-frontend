@@ -1,0 +1,125 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid(style='background: linear-gradient(to top,  #fff 0%,#fff 50%,#f3f8ec 50%,#f3f8ec 100%);')
+      .row.mx-md-5
+        .col-12.my-lg-3.register-label
+          h1.text-bold.text-primary3(style='font-size:2em') Registrarme
+          .bkg-primary3(style='width:5.5vw; height: 3px;')
+        .col-12(align='center'): .col-xl-9.col-12.mt-lg-4.p-md-5.p-0.p-sm-2
+          .card.card-register.mt-4.mt-md-0(style='border: 2px solid darkorange; border-radius: 24px; position:relative')
+            div.top-circles(style='left: calc( ( 100% - 3rem ) / 2 )')
+              i.ti-email.text-white(style='font-size:1.5em')
+            div.top-circles(style='left: calc( ( ( 100% - 3rem ) / 2 ) - 20% ) ')
+              i.ti-user.text-white(style='font-size:1.5em')
+            div.top-circles(style='left: calc( ( ( 100% - 3rem ) / 2 ) + 20% ) ')
+              i.ti-key.text-white(style='font-size:1.5em')
+            .row.pt-3
+              .col-12.text-center
+                p.mb-0(style='font-size:1.5rem; font-weight:bold; color:#3B3B3B')
+                  |Crea tu cuenta en la
+                  | 
+                  span.text-primary Ventana Menorca
+                p(style='font-size:0.8rem;font-weight:400;')
+                  |¿Ya tienes una cuenta?
+                  | 
+                  span.text-primary INGRESA AQUÍ
+              .col-12
+                form(id='signup-form', method='POST')
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  .row.justify-content-center
+                    .col-12: .row.justify-content-center: .col-md-10
+                      .w-100.my-1
+                        i.ti-arrow-down.input-icon
+                        select.menorca-input(id="docType" ,name='docType' onchange="ChangeDocType()" required)
+                          option(disabled selected hidden) Tipo de documento
+                          option(value='DNI') DNI
+                          option(value='CE') CE
+                          option(value='RUC') RUC
+                          option(value='Pasaporte') Pasaporte
+                    .col-12: .row.justify-content-center: .col-md-10
+                      .w-100.my-1
+                        i.ti-user.input-icon
+                        input.menorca-input(type='text', id='docNumber', name="docNumber", placeholder='DNI', oninput='onInputAction(this)', required)
+                    .col-12: .row.justify-content-center: .col-md-10
+                      .w-100.my-1
+                        i.ti-email.input-icon
+                        input.menorca-input(type='email',  name="email" placeholder='Ingrese correo' required)
+                    .col-12: .row.justify-content-center: .col-md-10
+                      .w-100.my-1
+                        i.ti-key.input-icon
+                        input.menorca-input(type='password', name='password', placeholder='Contraseña', minlength='6', required)
+                    .col-12: .row.justify-content-center: .col-md-10
+                      .w-100.my-1
+                        i.ti-key.input-icon
+                        input.menorca-input(type='password', name='repassword', placeholder='Confirmar Contraseña', minlength='6', required)
+                    .col-12.mt-3: .row.justify-content-center: .col-md-10
+                      .w-100.mb-3.d-flex.justify-content-center.align-items-center
+                        div.g-recaptcha(data-sitekey="6LeJwK8ZAAAAAKeeaYn1aTTkdcPVbfd-y__AUaIb")
+                      //- .w-100.my-1.d-flex.justify-content-center.align-items-center(style='font-size:0.9em; font-weight:400')
+                      //-   input.mr-2(type="checkbox" value="Terms" required)
+                      //-   p He leído y acepto los
+                      //-     | 
+                      //-     a.text-primary(href='/doc/Terminos_y_condiciones.pdf' target='_blank')  Términos y Condiciones
+                      .w-100.my-1.d-flex.justify-content-center.align-items-center(style='font-size:0.9em; font-weight:400')
+                        input.mr-2(type="checkbox" value="Terms" required)
+                        p He leído y acepto las
+                          | 
+                          a.text-primary(href='https://ventanamenorca.s3.us-east-2.amazonaws.com/Te%CC%81rminos+y+condiciones+de+uso+de+la+plataforma+Ventana+Menorca.pdf' target='_blank')  Términos y Condiciones
+                      .w-100.my-1.d-flex.justify-content-center.align-items-center(style='font-size:0.9em; font-weight:400')
+                        input.mr-2(type="checkbox" value="Terms" required)
+                        p He leído y acepto las
+                          | 
+                          a.text-primary(href='https://ventanamenorca.s3.us-east-2.amazonaws.com/Po%CC%81liticas+de+proteccio%CC%81n+de+datos.pdf' target='_blank')  Políticas de protección de datos
+                      .w-100.my-1.d-flex.justify-content-center.align-items-center.mt-4
+                        button.btn.btn-success.btn-menorca.font-btn.w-100.w-sm-50(type='submit')
+                          | Registrarme
+          //- div#WAButton
+  //script (validate input)  
+  script.
+    const inputNumber = document.getElementById("docNumber")
+    inputNumber.addEventListener("mousewheel", function(event){ this.blur() })
+    function ChangeDocType() {
+      var docType = document.getElementById('docType');
+      var docNumInput = document.getElementById('docNumber');
+      docNumInput.minLength = 0;
+      docNumInput.maxLength = 0;
+      switch (docType.value) {
+        case "DNI":
+          docNumInput.placeholder = "DNI";
+          docNumInput.value = "";
+          docNumInput.maxLength = 8;
+          docNumInput.minLength = 8;
+          docNumInput.type = 'number';
+          break;
+        case "CE":
+          docNumInput.placeholder = "CARNET DE EXTRANJERÍA"
+          docNumInput.value = "";
+          docNumInput.maxLength = 12;
+          docNumInput.minLength = 12;
+          docNumInput.type = 'text';
+          break;
+        case "Pasaporte":
+          docNumInput.placeholder = "Pasaporte"
+          docNumInput.value = "";
+          docNumInput.maxLength = 12;
+          docNumInput.minLength = 12;
+          docNumInput.type = 'text';
+          break;
+        case "RUC":
+          docNumInput.placeholder = "RUC"
+          docNumInput.value = "";
+          docNumInput.maxLength = 11;
+          docNumInput.minLength = 11;
+          docNumInput.type = 'number';
+          break;
+        default:
+          break;
+      }
+    }
+    function onInputAction(input) {
+      if (input.value.length > input.maxLength) {
+        input.value = input.value.slice(0, input.maxLength);
+      }
+    }

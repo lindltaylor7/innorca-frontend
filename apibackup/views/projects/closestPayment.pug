@@ -1,0 +1,120 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body: .row.justify-content-center
+        .col-md-6
+          .card-title
+            h2.title-primary2 Pago más cercano
+          .col-12.mt-4
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Nombre del proyecto
+              .col-md-1
+              .col-md-7
+                div #{ project.name }
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Tipo de proyecto
+              .col-md-1
+              .col-md-7
+                div #{ project.projectType || '-' }
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Número de contrato
+              .col-md-1
+              .col-md-7
+                div #{ budget.contractNum }
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Ubicación de pago
+              .col-md-1
+              .col-md-7
+                div #{ bank.code || '-' }
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Tipo de pago
+              .col-md-1
+              .col-md-7
+                div #{ payment.formattedTag || '-' }
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Monto a pagar
+              .col-md-1
+              .col-md-7
+                div #{ payment.formattedSaldo || '-' }
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Vencimiento de la letra
+              .col-md-1
+              .col-md-7
+                div #{ payment.formattedExpiresAt || '-' }
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Banco
+              .col-md-1
+              .col-md-7
+                div #{ bank.name }
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Manual de pago
+              .col-md-1
+              .col-md-7
+                if ( bank.manualLink )
+                  a.btn.btn-primary(href=`${bank.manualLink}` target="_blank") Ver manual
+                else
+                  div -
+            .form-group: .row
+              .col-md-4.text-primary2
+                | Ubicación de banco
+              .col-md-1
+              .col-md-7
+                if ( bank.mapLink )
+                  a.btn.btn-primary(href=`${bank.mapLink}` target="_blank") Ver mapa
+                else
+                  div -
+            if (user.profile.document == '45528449' || user.profile.document == '47083976')
+              .form-group: .row
+                .col-md-4.text-primary2 CIP
+                .col-md-1
+                .col-md-7
+                  form(action='/crearCip' method='post')
+                    input(type='hidden' name='budgetCode' value=budget.code)
+                    input(type='hidden' name='projectType' value=project.projectType)
+                    input(type='hidden')
+                    if ( !cip )
+                      if ( payment.type == 'quotas' )
+                        button(type='submit' name='currency' value='USD' style='white-space: nowrap;').btn.btn-primary.mb-2.mr-2 Solicitar CIP en Dolares
+                      button(type='submit' name='currency' value='PEN' style='white-space: nowrap;').btn.btn-primary.mb-2 Solicitar CIP en Soles
+                    else
+                      .btn.btn-primary(data-toggle="modal" data-target="#CipModal") Ver CIP
+
+    if (user.profile.document == '45528449' || user.profile.document == '47083976')
+      if (cip)
+        //- MODAL
+        #CipModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='CipModalLabel' aria-hidden='true' data-backdrop="static" data-keyboard="false")
+          .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content.py-3
+              .modal-header.justify-content-center.pb-0(style='border:none')
+                h5#CipModalLabel.modal-title.text-bold.pb-0.text-primary Datos de CIP
+              .modal-body
+                .row.justify-content-center
+                  .col-8.text-center
+                    .row.my-2
+                      .col-md-6 CIP:
+                      .col-md-6 #{ cip.cip }
+                    .row.my-2
+                      .col-md-6 Total a pagar:
+                      .col-md-6 #{ cip.payAmount }
+                    .row.my-2
+                      .col-md-6 Cantidad de letras a pagar:
+                      .col-md-6 #{ cip.quantity }
+                    .row.my-2
+                      .col-md-6 Tipo de cambio:
+                      .col-md-6 #{ cip.exchangeRate }
+                    .row.my-2
+                      .col-md-6 Moneda:
+                      .col-md-6 #{ cip.paymentIn }
+                .row.justify-content-center.flex-wrap
+                  a.btn.btn-primary.m-2(href='javascript:void(0)' data-dismiss="modal") Cerrar

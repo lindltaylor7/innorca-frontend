@@ -1,0 +1,267 @@
+extends ../layout
+
+block content
+  #budget-payments.page-wrapper
+    .container-fluid: .row: .col-12: .card: .card-body
+      div(v-if='!showInfo')
+        .row
+          .col-12: .card-title
+              .title-primary2.shimmer.shimmer-line-lg.w-50
+          .row.m-0.w-100.pl-3
+            .col-12.my-1.shimmer.shimmer-line-sm
+            .col-12.my-1.shimmer.shimmer-line-sm
+            .col-12.my-1.shimmer.shimmer-line-sm
+        hr
+        .row.my-1
+          .col-12.d-flex.justify-content-end
+            .shimmer.shimmer-line-lg.w-25
+        .row.mt-2
+          .col-12
+            .shimmer.shimmer-table-3
+        hr
+        .row.mt-4
+          .col-12.d-flex.justify-content-end
+            .shimmer.shimmer-line-lg.w-25
+      div(v-if='showInfo')
+        .row
+          .col-12: .card-title
+              .title-primary2 {{ project.name }}
+          .row.m-0.w-100
+            .col-md-6
+              div
+                .text-primary2.pr-1.d-inline-block Código del proyecto:
+                .d-inline-block {{ project.code }}
+              div
+                .text-primary2.pr-1.d-inline-block Número de contrato:
+                .d-inline-block  {{ query.contractNum }}
+              div
+                .text-primary2.pr-1.d-inline-block Tipo de pago:
+                .d-inline-block  Financiado
+            .col-md-6
+              div
+                .text-primary2.pr-1.d-inline-block Monto total:
+                .d-inline-block {{ projectTotal }}
+              div
+                .text-primary2.pr-1.d-inline-block Saldo pendiente:
+                .d-inline-block {{ saldo }}
+        hr
+        .row.my-1
+          .col-12.text-end
+            a.btn.btn-project.btn-primary(v-if='lastThreePendings[0]' :href=`'/ultimoPago?projectId=' + projectId + '&budgetCode=' + budgetCode`) Próxima letra a pagar
+            a.btn.btn-secondary(v-else href=`javascript:void(0);` data-toggle="tooltip" data-placement="top" title="Usted no tiene pagos pendientes") Ver detalle de último pago
+        .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-lg-none.mt-4
+          .col-auto.pl-1
+            strong.text-primary.m-0 Ver más
+          .col-auto.pr-1
+            img.ml-2(src="/images/arrow.png", width="25px", alt="")
+        //- TABLE OF PENDINGS
+        .row.mt-2
+          .col-12
+            .table-responsive.table-txt-responsive
+              table.table
+                thead
+                  tr.bkg-primary.text-white
+                    th(scope='col') Tipo de pago
+                    th(scope='col') Estado
+                    th(scope='col') Saldo
+                    th(scope='col') Banco a pagar
+                    th(scope='col') Enlace
+                    th(scope='col') Fecha de vencimiento
+                    th(scope='col') Manual de pago
+                    th(scope='col')
+                tbody(v-if='lastThreePendings.length != 0')
+                  tr(scope='row' v-for='pending in lastThreePendings')
+                    td {{ pending.formattedTag || '-' }}
+                    td {{ pending.status === 'pending' ? 'Pendiente' : pending.status === 'completed' ? 'Completado' : 'Pendiente' }}
+                    td {{ pending.formattedSaldo ? pending.formattedSaldo : '-' }}
+                    td {{ getBankName(pending.bankId) }}
+                    td 
+                      a(v-if='pending.bankId' :href='getBankLink(pending.bankId)' style='white-space: nowrap;') Ver mapa
+                      div(v-else) -
+                    td.text-center.completed.txt-bold(v-if="pending.status == 'completed'") {{ pending.formattedExpiresAt }}
+                    td.text-center.expired.txt-bold(v-else-if="pending.status == 'expired'") {{ pending.formattedExpiresAt }}
+                    td.text-center(v-else) {{ pending.formattedExpiresAt }}
+                    td
+                      a(v-if='pending.bankId' :href='getBankManual(pending.bankId)' target='_blank' style='white-space: nowrap;') Ver manual
+                      div(v-else) -
+                    td.pr-0(style='text-align: end !important' v-if="pending.status == 'expired'")
+                      - console.log(user.profile)
+                      - const msg = {text:`Quiero pagar mi deuda atrasada\nCliente: ${user.profile.name}\nTipo de documento:${user.profile.docType}\nNúmero de documento:${user.profile.document}\nNúmero teléfonico :${user.profile.secondaryTelephone}\nCorreo electrónico: ${user.email}`}
+                      - let data = encodeURI(msg.text)
+                      a.btn.btn-project.btn-danger(href='https://web.whatsapp.com/send?phone=+51942044085&text='+data target="_blank" v-if="pending.status == 'expired'")
+                        | Contáctanos
+              .text-center(v-if='lastThreePendings.length == 0') No tiene pagos pendientes
+
+        hr
+        .row.mt-4
+          if (user.profile.document == '45528449' || user.profile.document == '47083976' || user.profile.document == '46068839')
+            .col-12.text-end: a.btn.btn-primary(href='javascript:void(0)' @click='showModal()' v-if='!hasExpiredPayments') #{ cip ? 'Ver CIP': 'Solicitar CIP'}
+        .row.mt-2(v-if='!table.show')
+          .col-12.text-end: a.btn.btn-primary(href='javascript:void(0)' @click='enableTable()') Ver más
+      //- TABLE OF PAYMENTS/QUOTAS
+      .row: .col-12(v-if='table.show')
+        .row.mt-4
+          .col-md-6: .row.align-items-center
+            .col-md-5
+              strong.text-primary2 Estado
+              select.select2.form-control.border-primary2(name="select" v-model='table.paymentStatus')
+                option(value="" selected disabled hidden) --Estado--
+                option(value="") Todos los estados
+                option(value="completed") Completado
+                option(value="pending") Pendiente
+                option(value="expired") Expirado
+          .col-md-6.d-flex.justify-content-end.align-items-end
+            .mt-4.mt-md-0 Page: {{table.pagination.page}} / {{table.pagination.pages}}
+          .col-12 
+            .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-lg-none
+              .col-auto.pl-1
+                strong.text-primary.m-0 Ver más
+              .col-auto.pr-1
+                img.ml-2(src="/images/arrow.png", width="25px", alt="")
+        .row(v-if="table.pagination.page !== 0 || (table.payments.length == 0 && paymentStatus != null)")
+          .col-12: .table-responsive.mt-2.table-txt-responsive
+            table.table
+              thead
+                tr.bkg-primary.text-white
+                  th(scope='col') Tipo de pago
+                  th(scope='col') Estado
+                  th(scope='col') Descuento
+                  th(scope='col') Monto
+                  th(scope='col') Saldo
+                  th(scope='col') Banco a pagar
+                  th(scope='col') Enlace
+                  th(scope='col') Fecha de vencimiento
+                  th(scope='col') Manual de pago
+              tbody
+                tr(v-for="(payment, index) in table.payments" :key="index")
+                  td {{ payment.formattedTag || '-' }}
+                  td(v-if="payment.status === 'pending' || payment.status === 'expired' ") Pendiente
+                  td(v-else-if="payment.status === 'completed' ") Completado
+                  td(v-else) -
+                  td {{ payment.formattedDiscount || '-' }}
+                  td {{ payment.formattedAmount || '-' }}
+                  td {{ payment.formattedSaldo || '-' }}
+                  td {{ getBankName(payment.bankId) }}
+                  td
+                    a(:href='getBankLink(payment.bankId)' style='white-space: nowrap;') Ver mapa
+                  td.text-center.completed.txt-bold(v-if="payment.status==='completed' ") {{ payment.formattedExpiresAt}}
+                  td.text-center.txt-bold(v-else-if="payment.status==='pending' ") {{payment.formattedExpiresAt}}
+                  td.text-center.expired.txt-bold(v-else-if="payment.status==='expired'") {{payment.formattedExpiresAt}}
+                  td(v-else) -
+                  td
+                    a(:href='getBankManual(payment.bankId)' target='_blank' style='white-space: nowrap;') Ver manual
+            .text-center(v-if="table.payments.length == 0 && paymentStatus !==null && !processing") No se encontraron resultados
+            .text-center(v-if="processing") Cargando ...
+        .row.py-3: .col-12.d-flex.justify-content-center
+          .mx-1(v-for='pageListItem in table.pagesList' :key='"pageListItem" + pageListItem')
+            a.btn(href='javascript:void(0)' @click='paginateTablePayments(pageListItem)' :class='[ isActualPage(pageListItem) ? "btn-primary" : "btn-outline-primary" ]') {{ pageListItem }}
+
+    if (user.profile.document == '45528449' || user.profile.document == '47083976' || user.profile.document == '46068839')
+      //- MODAL
+      #CipModal.modal.fade(v-if='!hasExpiredPayments' tabindex='-1' role='dialog' aria-labelledby='CipModalLabel' aria-hidden='true' data-backdrop="static" data-keyboard="false")
+        .modal-dialog.modal-dialog-centered(role='document')
+
+          .modal-content.py-3(v-if='modal.errorMessage')
+            .modal-header.justify-content-center.pb-0(style='border:none')
+              h5#CipModalLabel.modal-title.text-bold.pb-0.text-primary {{ modal.errorMessage }}
+
+          .modal-content.py-3(v-else)
+            .modal-header.justify-content-center.pb-0(style='border:none')
+              h5#CipModalLabel.modal-title.text-bold.pb-0.text-primary {{ modal.processstatus }}
+
+            .modal-body(v-if='modal.cip' :key='"cipData"')
+              .row.justify-content-center
+                .col-10.text-center
+                  .row.my-2
+                    .col-md-6 CIP:
+                    .col-md-6 {{ modal.cip.cip }}
+                  .row.my-2
+                    .col-md-6 Link PagoEfectivo:
+                    .col-md-6 
+                      a(:href='modal.cip.cipUrl' target='_blank') Ver CIP
+                  .row.my-2
+                    .col-md-6 Total a pagar:
+                    .col-md-6 {{ modal.cip.payAmount }}
+                  .row.my-2
+                    .col-md-6 Cantidad de letras:
+                    .col-md-6 {{ modal.cip.quantity }}
+                  .row.my-2
+                    .col-md-6 Tipo de cambio:
+                    .col-md-6 {{ modal.cip.exchangeRate }}
+                  .row.my-2
+                    .col-md-6 Moneda:
+                    .col-md-6 {{ modal.cip.paymentIn }}
+                  .row.my-2
+                    .col-md-6 Fecha de creación:
+                    .col-md-6 {{ formatDate(modal.cip.createdAt) }}
+                  .row.my-2
+                    .col-md-6 Fecha de expiración:
+                    .col-md-6 {{ modal.cip.formattedExpiresAt }}
+              .row.justify-content-center.flex-wrap
+                a.btn.btn-primary.m-2(href='javascript:void(0)' @click='hideModal') Cerrar
+
+            .modal-body(v-else-if='modal.phase1' :key='"phase1"')
+              .row.justify-content-center
+                .col-8.text-center
+                  .row.my-2(v-for='index in 3')
+                    .col-md-12.shimmer.shimmer-line-sm
+
+            .modal-body(v-else-if='modal.phase2' :key='"phase2"')
+              .row.justify-content-center
+                .col-8.text-center
+                  .row.my-2
+                    .col-md-6.text-primary Cantidad de letras a pagar:
+                    .col-md-6
+                      .dropdown
+                        button#quantityBtn.btn.btn-light.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :disabled='modal.processingCip ? true : false')
+                          | {{ modal.quantity }}
+                        .dropdown-menu.custom-dropdown-menu(aria-labelledby="quantityBtn")
+                          a.dropdown-item(v-for='payment, index in modal.payments' @click='setModalQuantity(index + 1)') {{ index + 1 }}
+                  .row.my-2(v-if='modal.exchangeRateToShow')
+                    .col-md-6.text-primary Tipo de cambio:
+                    .col-md-6 {{ modal.exchangeRateToShow }}
+                  .row.my-2
+                    .col-md-6.text-primary Moneda:
+                    .col-md-6(v-if='isLotes')
+                      .dropdown
+                        button#currencyBtn.btn.btn-light.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :disabled='modal.isLotes ? true : false')
+                          | {{ modal.cipCurrency }}
+                        .dropdown-menu.custom-dropdown-menu(aria-labelledby="currencyBtn")
+                          a.dropdown-item(@click='setModalCipCurrency("USD")') USD
+                          a.dropdown-item(@click='setModalCipCurrency("PEN")') PEN
+                    .col-md-6(v-else)
+                      .dropdown
+                        button#currencyBtn.btn.btn-light.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :disabled='true')
+                          | {{ modal.cipCurrency }}
+              .row.justify-content-center.flex-wrap
+                a.btn.btn-primary.m-2(href='javascript:void(0)' @click='hideModal' :data-dismiss="modal.processingPhase2 ? '' : 'modal'") Cerrar
+                a.btn.btn-primary.m-2(href='javascript:void(0)' @click='toPhase3' :class='{ disabled: modal.processingPhase2 }') Continuar
+
+            .modal-body(v-else-if='modal.phase3' :key='"phase3"')
+              .row.justify-content-center
+                .col-8.text-center
+                  .row.my-2
+                    .col-md-6.text-primary Cantidad de letras a pagar
+                    .col-md-6 {{ modal.quantity }}
+                  .row.my-2
+                    .col-md-6.text-primary Monto a pagar:
+                    .col-md-6 {{ modal.saldo }}
+                  .row.my-2(v-if='modal.exchangeRateToShow')
+                    .col-md-6.text-primary Tipo de cambio:
+                    .col-md-6 {{ modal.exchangeRateToShow }}
+                  .row.my-2
+                    .col-md-6.text-primary Moneda:
+                    .col-md-6
+                      .dropdown
+                        button#currencyBtn.btn.btn-light.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :disabled='true')
+                          | {{ modal.cipCurrency }}
+              .row.justify-content-center.flex-wrap
+                a.btn.btn-primary.m-2(href='javascript:void(0)' @click='hideModal' :data-dismiss="modal.processingCip ? '' : 'modal'" :class='{ disabled: modal.processingCip }') Cerrar
+                a.btn.btn-primary.m-2(href='javascript:void(0)' @click='backToPhase2' :class='{ disabled: modal.processingCip }') regresar
+                a.btn.btn-primary.m-2(v-if='!showBenefitBtn()' href='javascript:void(0)' @click='generateCIP' :class='{ disabled: modal.processingCip }') Solicitar CIP
+
+                a.btn.btn-primary.m-2(v-if='showBenefitBtn()' :href='buildWspMsg()' target="_blank") Contactar con cobranzas para más beneficios
+
+
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/big.js/6.0.3/big.min.js')
+  script(src='/js/vue/projects/budgetPayments.js?v=0.0.2' defer)

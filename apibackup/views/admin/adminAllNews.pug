@@ -1,0 +1,82 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid#admin-all-news
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Novedades
+        .card-subtitle 
+          hr
+          .row
+            .col-12.d-flex.align-items-center.justify-content-between
+              h4.text-muted
+                strong Filtros
+              a.btn.btn-primary.float-right(href=`/admin/noticias/crear`)
+                i.fas.fa-plus-circle
+                |  Crear Novedad     
+        .row
+          .col-md-3
+            strong.text-primary2(style="margin-right:1em") Fecha de creación
+            input.select2.form-control.border-primary2#reportrange
+          .col-md-3
+            strong.text-primary2 Título de la Novedad
+            select.select2.form-control.border-primary2(name="select" @change=`getAdminOtherNews($event, 'title')`)
+              option(value="nofilter" selected disabled hidden) --Título--
+              option(value="nofilter") Sin Filtro
+              each a in allNews
+                option(value=`${a.title}`) #{a.title}
+          .col-md-3
+            strong.text-primary2 Subtítulo de la Novedad
+            select.select2.form-control.border-primary2(name="select" @change=`getAdminOtherNews($event, 'subTitle')`)
+              option(value="nofilter" selected disabled hidden) --Subtítulo--
+              option(value="nofilter") Sin Filtro
+              each a in allNews
+                option(value=`${a.subTitle}`) #{a.subTitle}
+        hr
+        .card-title.d-flex.align-items-center.justify-content-between
+          h4 Gestionar Novedades
+          a.btn.btn-warning.text-white.float-right(href=`/admin/publicidad/editar`)
+            i.far.fa-newspaper
+            |  Gestionar publicidad
+        .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-lg-none
+          .col-auto.pl-1
+            strong.text-primary.m-0 Ver más
+          .col-auto.pr-1
+            img.ml-2(src="/images/arrow.png", width="25px", alt="")
+        .table-responsive.mt-4
+          table.table
+            thead: tr.bkg-primary.text-white
+                th(scope='col') Fecha de creación
+                th(scope='col') Título
+                th(scope='col') Subtitulo
+                th(scope='col') Estado
+                th.hidden-sm Acciones
+            tbody
+              tr(v-if='posts !== null' v-for="(post, index) in posts" :key="index")
+                th(v-if='post.createdAt') {{post.createdAt}}
+                th(v-else) -
+                td(v-if='post.title') {{post.title}}
+                th(v-else) -
+                td(v-if='post.subTitle') {{post.subTitle}}
+                th(v-else) -
+                td(v-if='post.disponible')
+                  a.btn.btn-success(:href=`'/admin/noticias/'+post._id+'/visible'`) Visible
+                td(v-else)
+                  a.btn.btn-danger(:href=`'/admin/noticias/'+post._id+'/visible'`) No visible
+                td
+                  .btn-group.dropdown
+                    a#dropdownMenuButton.btn.btn.btn-success.btn-menorca.dropdown-toggle(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                      | Opciones
+                    .dropdown-menu(aria-labelledby='dropdownMenuButton')
+                      a.dropdown-item(:href=`'/admin/noticias/'+post._id+'/previsualizar'`) Previsualizar
+                      a.dropdown-item(:href=`'/admin/noticias/'+post._id+'/editar'`) Editar Novedad
+          .text-center(v-if="posts.length===0 && filter===null") Aún no ha creado Novedades
+          .text-center(v-else-if="posts.length===0 && filter!==null && !isProcessing") No se encontraron resultados
+          .text-center(v-if="isProcessing") Cargando ...
+          .form-actions: .text-right
+            a.btn.btn-primary.back-btn(v-if="page > 1" @click.prevent=`getAdminOtherNews($event, 'noType','false')`)
+              i.fa.fa-envelope-o Atrás
+            a.btn.btn-secondary.back-btn(v-else) Atrás
+            a.btn.btn-primary(v-if="total_pages > page" @click.prevent=`getAdminOtherNews($event, 'noType','true')`) Ver más
+            a.btn.btn-secondary(v-else) Ver más

@@ -1,0 +1,87 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid#use-all-requests
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Mis consultas
+        .card-subtitle 
+          p.d-inline-block En esta sección podrá ingresar consultas relacionadas a sus inmuebles, dirigidas al área de Atención al Cliente o Cobranzas, y verificar el estado de respuesta de las mismas.
+          hr
+          .row
+            .col-12.d-flex.align-items-center.justify-content-between
+              h4.text-muted
+                strong Filtros
+              a.btn.btn-primary.float-right(href=`/consultas/crear`)
+                i.fas.fa-plus-circle
+                |  Crear consulta
+        .row
+          .col-md-3.align-self-end.mt-2.mt-md-0
+            strong.text-primary2(style="margin-right:1em") Fecha de creación
+            input.select2.form-control.border-primary2#reportrange
+          hr.space.s
+          .col-md-3.align-self-end.mt-2.mt-md-0
+            strong.text-primary2 Proyecto
+            select.select2.form-control.border-primary2#projectInput(name="select" @change=`getOtherRequests($event, 'project')`)
+              option(value="nofilter" selected disabled hidden) Proyecto
+              option#noFilterProject(value="nofilter") Sin filtro
+              each project in projects
+                option(value=`${project._id}`) #{project._id}
+          .col-md-3.align-self-end.mt-2.mt-md-0
+            strong.text-primary2 Estado
+            select.select2.form-control.border-primary2#statusInput(name="select" @change=`getOtherRequests($event, 'status')`)
+              option(value="nofilter" selected disabled hidden) Estado
+              option#noFilterStatus(value="nofilter") Sin filtro
+              option(value="0") Pendiente
+              option(value="1") Respondido
+              //- option(value="2") Resuelto
+          .col-md-3.h-100.align-self-end.text-end.mt-2.mt-md-0
+            button.btn.btn-primary(@click.prevent='clearFilters()') Limpiar filtros
+        hr.space.s
+        .row
+          .col-md-12
+            .card-box
+              h4
+                strong.pl-2 Gestionar consultas
+              .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-md-none
+                .col-auto.pl-1
+                  strong.text-primary.m-0 Ver más
+                .col-auto.pr-1
+                  img.ml-2(src="/images/arrow.png", width="25px", alt="")
+              .table-responsive.mt-4
+                table.table
+                  thead
+                    tr.bkg-primary.text-white
+                      th(scope='col') #
+                      th(scope='col') Nombre del proyecto
+                      th(scope='col') Tipo de atención
+                      th(scope='col') Asunto
+                      th(scope='col') Fecha
+                      th(scope='col') Estado
+                  tbody
+                    tr.cursor-pointer(v-if='requests !== null' v-for="(request, index) in requests" :key="index" @click.prevent='openRequest(request._id)')
+                      td {{index+1}}
+                      td(v-if="request.nameProject") {{request.nameProject}}
+                      td(v-else) -
+                      td(v-if="request.typeConsult  === 0") Consulta de Atención al Cliente
+                      td(v-else-if='request.typeConsult === 1') Consulta de Cobranzas
+                      td(v-else-if='request.typeConsult === 2') Otras consultas
+                      td(v-else-if='request.typeConsult === 3') Sugerencias
+                      td(v-if="request.subject") {{request.subject}}
+                      td(v-else) -
+                      td(v-if="request.createdAt") {{request.createdAt}}
+                      td(v-else) -
+                      td(v-if="request.status  === 0") Pendiente
+                      td(v-else-if='request.status === 1') Respondido
+                      td(v-else-if='request.status === 2') Resuelto
+                .text-center(v-if="requests.length===0 && filter!==null && !isProcessing") No se encontraron resultados
+                .text-center(v-if="isProcessing") Cargando ...    
+          .col-md-12
+            .card-box.row.d-flex.justify-content-end
+              a.btn.back-btn(v-if="page > 1" @click.prevent=`getOtherRequests($event, 'noType', 'false')`) Atrás
+              a.btn.btn-primary.back-btn(v-else) Atrás
+              a.btn(v-if="total_pages > page" @click.prevent=`getOtherRequests($event, 'noType', 'true')`) Ver más
+              a.btn.btn-primary(v-else) Ver más
+          hr.space.s
+

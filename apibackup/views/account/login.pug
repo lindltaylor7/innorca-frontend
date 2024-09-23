@@ -1,0 +1,315 @@
+extends ../layout
+
+block content
+  .page-wrapper: .container-fluid
+    section.row.section-login.pt-md-5.pt-0
+      .cold-sm-12.col-md-6.p-0: .row.m-0
+        .col-12(style="padding: 25px 50px;")
+          p.mb-0.text-bold.text-primary3(style='font-size:1.5em') Bienvenido a la nueva
+          h1.mb-0.text-bold.text-primary3 Ventana 
+            | 
+            img.mb-1(src='/images/welcome.svg' height="25rem" alt='homepage')
+          .bkg-primary3(style='width:5.25vw; height: 3px;')
+          p.mt-4(style='font-weight: 400')
+            |Accede a información de tus inmuebles sin salir de casa, de  una manera segura y accesible desde tu PC o celular.
+        .responsiveNone.col-12(style='padding: 40px 50px; margin-bottom:50px; background-color:#f3f8ec')
+          h2.text-bold.text-primary3 ¿Qué puedo hacer?
+          .bkg-primary3(style='width:6vw; height: 3px;')
+          ul.mt-3(style='font-weight:400')
+            li.my-2 Revisar el detalle de estado de tus letras, dónde y cómo pagarlas.
+            li.my-2 Realizar consultas o solicitudes a nuestro equipo de atención al cliente o cobranzas.
+            li.my-2 Referir familiares y/o amigos y ganar dinero por el programa Referidos Menorca.
+          .row: .col.text-center.text-lg-start
+            a.btn.btn-success.btn-menorca.mt-3(href="/signup" style='font-size: 1.4em; width:100%').w-lg-50 REGISTRARME
+
+      .cold-sm-12.col-md-6.d-flex.align-items-center.p-0
+          .card-menorca.mt-md-0.py-5.px-lg-5.px-3(style='background-size: cover; background: url(/images/newsingupandlogin/background-login.png) no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover;-o-background-size: cover ;')
+            .inner-card-login.text-center
+              .top-circles-login(style='background-image: url(/images/newsingupandlogin/ventana2.svg)')
+              p.text-center.mt-4.mb-3(style='; font-weight:bold; color:#3B3B3B; font-size:1.2em')
+                |Ingresar a mi
+                | 
+                span.text-primary3 Ventana Menorca
+              form(method='post' action='/login')
+                .w-100.my-1(style='position:relative')
+                  i.ti-arrow-down.input-icon(style='top: 0.3rem;right:8px')
+                  select.menorca-input.bkg-white(id="docType" ,name='docType' onchange="ChangeDocType()")
+                    option(disabled selected hidden) Tipo de documento
+                    option(value='DNI') DNI
+                    option(value='CE') CE
+                    option(value='RUC') RUC
+                    option(value='pasaporte') Pasaporte
+                .w-100.my-1(style='position:relative')
+                  i.ti-user.input-icon(style='top: 0.3rem;right:8px')
+                  input.menorca-input.bkg-white(type='text', id='docNumber', name="docNumber", placeholder='Número de documento', oninput='onInputAction(this)', required)
+                .w-100.my-1(style='position:relative')
+                  i.ti-key.input-icon(style='top: 0.3rem;right:8px')
+                  input.menorca-input.bkg-white(type='password', name='password', id='password', placeholder='Contraseña', required)
+                .w-100.my-1
+                  button.w-100.btn.btn-menorca2.mt-4(type='submit') INGRESAR
+                .w-100.my-1.d-flex.align-items-center.justify-content-center
+                  a.btn.btn-link.text-bold(href='/forgot' style='font-size:0.75em') Olvidé mi contraseña
+                  div.text-primary |
+                  a.btn.btn-link.text-bold(href='/signup' style='font-size:0.75em') Aún no me he registrado
+      .responsiveBlock.col-12(style='padding: 40px 50px; margin-bottom:50px; background-color:#f3f8ec')
+          h2.text-bold.text-primary3 ¿Qué puedo hacer?
+          .bkg-primary3(style='width:6vw; height: 3px;')
+          ul.mt-3(style='font-weight:400')
+            li.my-2 Revisar el detalle de estado de tus letras, dónde y cómo pagarlas.
+            li.my-2 Realizar consultas o solicitudes a nuestro equipo de atención al cliente o cobranzas.
+            li.my-2 Referir familiares y/o amigos y ganar dinero por el programa Referidos Menorca.
+          .row: .col.text-center.text-lg-start
+            a.btn.btn-success.btn-menorca.mt-3(href="/signup" style='font-size: 1.4em; width:100%').w-lg-50 REGISTRARME
+
+    section.row.sucursales
+      .container
+        .row
+          .col-lg-8.offset-lg-2
+            h3.title-primary2.text-center
+              | &iexcl;Encu&eacute;ntranos en cualquiera
+              | de nuestras oficinas de ventas!
+        .row.mt-3.mt-md-5.oficinas
+          .col-lg-4.col-md-6
+            .item__sucursal
+              .sucursal-top
+                | Ica
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p Av Los Educadores S/N
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel:988991413') 988991413
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p Horario: 9:00 a 6:00 pm
+          .col-lg-4.col-md-6
+            .item__sucursal.principal
+              .sucursal-top
+                | Of. Central - Lima
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p Av. Javier Prado Este 488 (Torre Orqu&iacute;deas) San Isidro
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel:(01) 2032828') (01) 2032828
+                    a(href='tel:')
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p
+                    | Lunes a Viernes de 9:00 a.m. a 6:00 p.m.
+                    br
+                    | S&aacute;bados de 9:30 a.m. a 1:00 p.m.
+          .col-lg-4.col-md-6
+            .item__sucursal
+              .sucursal-top
+                | Mala
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p Av. Marchand mz 21 lote 21. A media cuadra del Mercado Principal de Mala. 
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel:988991413') 988991413
+                    a(href='tel:')
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p
+                    | Horario:
+                    | Lunes a Domingo
+                    | 10:00 a 6:00 pm
+          .col-lg-4.col-md-6
+            .item__sucursal
+              .sucursal-top
+                | Pisco
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p  Av. Francisco Bolognesi 159 a 1/2 cdra de la plaza de armas de Pisco.
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel:922749338') 922749338
+                    a(href='tel:')
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p Horario: 9:00 am a 6:00 pm
+          .col-lg-4.col-md-6
+            .item__sucursal
+              .sucursal-top
+                | Piura
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p Av. Sanchez Cerro cruce con Av. Marcavelica.
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel:934969977') 934969977
+                    a(href='tel:')
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p Horario: 9:00 a 6:00 pm
+          .col-lg-4.col-md-6
+            .item__sucursal
+              .sucursal-top
+                | Pachacamac
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p Av. Victor Malasquez km 8.6
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel:924231243') 924231243
+                    a(href='tel:')
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p Horario: 9:00 a 6:00 pm
+          .col-lg-4.col-md-6
+            .item__sucursal
+              .sucursal-top
+                | Chiclayo
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p Av. Balta 1126, Chiclayo (Cruce con Leoncio Prado)
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel: 988991413')  988991413
+                    a(href='tel:')
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p Horario: 9:00 a 6:00 pm
+          .col-lg-4.col-md-6
+            .item__sucursal
+              .sucursal-top
+                | Ica
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p M&oacute;dulo: C.C El Quinde
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel:988991413') 988991413
+                    a(href='tel:')
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p Horario: 9:00 a 6:00 pm
+          .col-lg-4.col-md-6
+            .item__sucursal.edition
+              .sucursal-top
+                | Arequipa
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p Urb. Los Cedros Mz E lote 3 Yanahuara
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel:934970418') 934970418
+                    a(href='tel:')
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p Horario: 9:00 a 6:00 pm
+          .col-lg-4.col-md-6
+            .item__sucursal
+              .sucursal-top
+                | Carabayllo
+              .sucursal-info
+                div
+                  img.i-color(src='/images/icons/contacto_location.svg' alt='Location Icon')
+                  img.i-white(src='/images/icons/contacto_location-w.svg' alt='Location Icon')
+                  p Av. San Juan S/N altura del paradero San Antonio
+                div
+                  img.i-color(src='/images/icons/contacto_phone.svg' alt='Phone Icon')
+                  img.i-white(src='/images/icons/contacto_phone-w.svg' alt='Phone Icon')
+                  p.phone-contacto
+                    a(href='tel:955012053') 955012053
+                    a(href='tel:')
+                div
+                  img.i-color(src='/images/icons/contacto_clock.svg' alt='Clock Icon')
+                  img.i-white(src='/images/icons/contacto_clock-w.svg' alt='Clock Iom')
+                  p Horario: 9:00 a 6:00 pm   
+    //- div#WAButton
+  //script (validate input)  
+  script.
+    const inputNumber = document.getElementById("docNumber")
+    inputNumber.addEventListener("mousewheel", function(event){ this.blur() })
+    function ChangeDocType() {
+      var docType = document.getElementById('docType');
+      var docNumInput = document.getElementById('docNumber');
+      docNumInput.minLength = 0;
+      docNumInput.maxLength = 0;
+      switch (docType .value) {
+        case "DNI":
+          docNumInput.placeholder = "Ingresa tu DNI";
+          docNumInput.value = "";
+          docNumInput.maxLength = 8;
+          docNumInput.minLength = 8;
+          docNumInput.type = 'number';
+          break;
+        case "CE":
+          docNumInput.placeholder = "Ingresa tu CARNET DE EXTRANJERÍA"
+          docNumInput.value = "";
+          docNumInput.maxLength = 12;
+          docNumInput.minLength = 12;
+          docNumInput.type = 'text';
+          break;
+        case "Pasaporte":
+          docNumInput.placeholder = "Ingresa tuPasaporte"
+          docNumInput.value = "";
+          docNumInput.maxLength = 12;
+          docNumInput.minLength = 12;
+          docNumInput.type = 'text';
+          break;
+        case "RUC":
+          docNumInput.placeholder = "Ingresa tu RUC"
+          docNumInput.value = "";
+          docNumInput.maxLength = 11;
+          docNumInput.minLength = 11;
+          docNumInput.type = 'number';
+          break;
+        default:
+          break;
+      }
+    }
+
+    function onInputAction(input) {
+      if (input.value.length > input.maxLength) {
+        input.value = input.value.slice(0, input.maxLength);
+      }
+    }

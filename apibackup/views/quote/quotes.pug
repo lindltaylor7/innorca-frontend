@@ -1,0 +1,84 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid#user-all-quotes
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Mis construcciones
+        .card-subtitle 
+          p.d-inline-block En esta sección podrá realizar cotizaciones estimadas para una futura construcción en su terreno.
+          hr
+          .row
+            .col-12.d-flex.align-items-center.justify-content-between
+              h4.text-muted
+                strong Filtros
+              a.btn.btn-primary.float-right(href='/cotizador')
+                i.fas.fa-plus-circle
+                |  Cotizar nuevo proyecto
+        .row
+          .col-md-3
+            strong.text-primary2(style="margin-right:1em") Fecha de creación
+            input.select2.form-control.border-primary2#reportrange
+          .col-md-3
+            strong.text-primary2 Mes de creación
+            select.select2.form-control.border-primary2#monthInput(name="select" @change=`getOtherQuotes($event, 'month')`)
+              option(value="nofilter" selected disabled hidden) Mes
+              option#noFilterMonth(value="nofilter") Sin filtro
+              option(:value=`m+1` v-for="m in months") {{momentMonth(m)}}
+          .col-md-3
+            strong.text-primary2 Asesoría
+            select.select2.form-control.border-primary2#statusInput(name="select" @change=`getOtherQuotes($event, 'status')`)
+              option(value="nofilter" selected disabled hidden) Estado
+              option#noFilterStatus(value="nofilter") Sin filtro
+              option(value="true") Si
+              option(value="false") No
+          .col-md-3.h-100.align-self-end.text-end.mt-2
+            button.btn.btn-primary(@click.prevent='clearFilters()') Limpiar filtros
+        hr.space.s
+        .row
+          .col-md-12
+            .card-box
+              h4
+                strong.pl-2 Gestionar cotizaciones
+              .row.d-flex.flex-row-reverse.bd-highlight.d-block.d-md-none
+                .col-auto.pl-1
+                  strong.text-primary.m-0 Ver más
+                .col-auto.pr-1
+                  img.ml-2(src="/images/arrow.png", width="25px", alt="")
+              .table-responsive.mt-4
+                table.table
+                  thead
+                    tr.bkg-primary.text-white
+                      th(scope='col') #
+                      th(scope='col') Tipo de construcción
+                      th(scope='col') Fecha tentativa
+                      th(scope='col') Habitaciones
+                      th(scope='col') Costo final
+                      th(scope='col') Fecha
+                      th(scope='col') Asesoría
+                  tbody
+                    tr.cursor-pointer(v-if='quotes !== null' v-for="(quote, index) in quotes" :key="index" @click.prevent='openQuote(quote._id)')
+                      td {{index+1}}
+                      td(v-if="quote.projectType") {{quote.projectType}}
+                      td(v-else) -
+                      td(v-if="quote.startDate") {{quote.startDate}}
+                      td(v-else) -
+                      td(v-if="quote.projects.length") {{quote.projects.length}}
+                      td(v-else)
+                      td(v-if="quote.finalCost") S/{{formatMoney(quote.totalCostNumber)}}
+                      td(v-else) - -
+                      td(v-if="quote.createdAt") {{quote.createdAt}}
+                      td(v-else) -
+                      td(v-if="quote.counseling") {{quote.counseling?'Si':'No'}}
+                      td(v-else) No
+                .text-center(v-if="quotes.length===0 && filter===null") Aún no ha cotizado algún proyecto
+                .text-center(v-if="quotes.length===0 && filter!==null && !isProcessing") No se encontraron resultados
+                .text-center(v-if="isProcessing") Cargando ...    
+        .row.pt-3
+          .col-12.text-end
+            a.btn.btn-primary.back-btn(v-if="page > 1" @click.prevent=`getOtherQuotes($event, 'noType', 'false')`) Atrás
+            a.btn.btn-secondary.btn-primary.back-btn(v-else) Atrás
+            a.btn.btn-primary(v-if="total_pages > page" @click.prevent=`getOtherQuotes($event, 'noType', 'true')`) Ver más
+            a.btn.btn-secondary(v-else) Ver más
+

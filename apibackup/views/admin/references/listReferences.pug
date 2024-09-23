@@ -1,0 +1,77 @@
+extends ../../layout
+
+block content
+  .page-wrapper
+    .container-fluid#admin-all-references
+      .row: .col-12: .card: .card-body
+        .card-title
+          h2.title-primary2 Referidos
+        .card-subtitle 
+          hr
+          .row
+            .col-12
+              h4.text-muted
+                strong Filtros
+        .row
+          .col-12.col-sm-12.col-md-6.col-lg-4.col-xl-3
+            strong.text-primary2(style="margin-right:1em") Fecha de creación
+            input.select2.form-control.border-primary2#reportrange
+          .col-12.col-sm-12.col-md-6.col-lg-4.col-xl-3
+            strong.text-primary2 Tipo de proyecto
+            select.select2.form-control.border-primary2#projectTypeInput(name="select" @change=`getAdminOtherReferences($event, 'projectType')`)
+              option(value="all" selected disabled hidden) tipo de proyecto
+              option#noFilterProjectTypeInput(value="nofilter") Sin Filtro
+              option(value="Lote") Lotes
+              option(value="Casa") Casas
+          .col-12.col-sm-12.col-md-6.col-lg-4.col-xl-3
+            strong.text-primary2 Nombre del referido
+            select.select2.form-control.border-primary2#nameInput(name="select" @change=`getAdminOtherReferences($event, 'name')`)
+              option(value="nofilter" selected disabled hidden) nombre
+              option#noFilterName(value="nofilter") Sin Filtro
+              each r in references
+                option(value=`${r.name}`) #{r.name}
+          .col-12.col-sm-12.col-md-6.col-lg-4.col-xl-3
+            strong.text-primary2(style="margin-right:1em") Estado
+            select.select2.form-control.border-primary2#statusInput(name="select" @change=`getAdminOtherReferences($event, 'status')`)
+              option(value="nofilter" selected disabled hidden) estado
+              option#noFilterStatus(value="nofilter") Sin filtro
+              option(value="pending") Pendiente
+              option(value="deposit") Depósito
+              option(value="separation") Separación
+              option(value="saleprocess") En proceso de venta
+              option(value="desist") Desistió
+              option(value="reserv") Reserva
+              
+          .col-12.h-100.align-self-center.text-end.mt-2
+            button.btn.btn-primary(@click.prevent='clearFilters()') Limpiar Filtros
+        hr
+        .card-title
+          .row.align-items.center
+            .col-6.text-start
+              h4 Gestionar Referidos
+            .col-6.text-end
+              a.btn.btn-primary.disabled(:href='exportUrl' target='_blank') Exportar
+        .table-responsive.mt-4
+          table.table
+            thead: tr.bkg-primary.text-white
+                th(scope='col') Nombre
+                th(scope='col') DNI
+                th(scope='col') Teléfono
+                th(scope='col') Correo
+                th(scope='col') Estado
+            tbody
+              tr.cursor-pointer(v-if='references !== null' v-for="(reference, index) in references" :key="index" @click.prevent='openReference(reference._id)')
+                th(scope='row') {{ reference.name }}
+                td {{ reference.dni }}
+                td {{ reference.phone }}
+                td {{ reference.email }}
+                td {{ getStatusName(reference.sperantStatus) }}
+          .text-center(v-if="isProcessing") Cargando ...
+          .form-actions: .text-right
+            a.btn.btn-primary.back-btn(v-if="page > 1" @click.prevent=`getAdminOtherReferences($event, 'noType','false')`)
+                i.fa.fa-envelope-o Atrás
+            a.btn.btn-secondary.back-btn(v-else) Atrás
+            a.btn.btn-primary(v-if="total_pages > page" @click.prevent=`getAdminOtherReferences($event, 'noType','true')`) Ver más
+            a.btn.btn-secondary(v-else) Ver más
+
+  script(src='/js/vue/admin/references/listReferences.js?v=0.0.2' defer)

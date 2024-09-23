@@ -1,0 +1,107 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid.bckg-white
+      - let nextIsLote = nextPayment.type == 'quotas'
+      .title-primary2 Detalle de su próxima #{ nextIsLote ? 'letra' : 'pago' } pendiente
+      hr.space.m
+      .row: .col-md-12: .card-box
+        .col-md-12
+          .row
+            h4.text-color
+              strong Próxima letra a pagar
+          .row.d-flex.justify-content-between.border-bot
+            h4.mr-auto.text-color #{ nextIsLote ? 'Código' : 'Nombre' }:
+              strong #{ nextIsLote ? nextPayment.code : nextPayment.name }
+            h3 #{ nextPayment.formattedSaldo || '-' }
+        .col-md-12
+          .row
+            label.col-md-6.col-form-label.font-weight-bold.text-left Ubicación de pago:
+            .col-md-6 #{ nextPaymentBank.code || '-' }
+          .row
+            label.col-md-6.col-form-label.font-weight-bold.text-left Tipo de pago:
+            .col-md-6 #{ nextPayment.formattedTag || '-' }
+          .row
+            label.col-md-6.col-form-label.font-weight-bold.text-left Vencimiento de la letra:
+            .col-md-6 #{ nextPayment.formattedExpiresAt || '-' }
+          .row
+            label.col-md-6.col-form-label.font-weight-bold.text-left  Estado de letra:
+            .col-md-6 Pendiente
+          .row
+            label.col-md-6.col-form-label.font-weight-bold.text-left  Banco a pagar:
+            .col-md-6 #{ nextPaymentBank.name || '-' }
+          .row
+            label.col-md-6.col-form-label.font-weight-bold.text-left  Manual de pago:
+            .col-md-6
+              if ( nextPaymentBank.manualLink )
+                a(href=`${nextPaymentBank.manualLink}` target="_blank") Ver manual
+              else
+                div -
+          .row
+            label.col-md-6.col-form-label.font-weight-bold.text-left  Ubicación de banco
+            .col-md-6
+              if ( nextPaymentBank.mapLink )
+                a(href=`${nextPaymentBank.mapLink}`) Ver mapa
+              else
+                div -
+
+          if (user.profile.document == '45528449' || user.profile.document == '47083976')
+            .row
+              label.col-md-6.col-form-label.font-weight-bold.text-left.mb-2 CIP
+              form(action='/crearCip' method='post').col-md-6
+                input(type='hidden' name='budgetCode' value=budgetCode)
+                input(type='hidden' name='projectType' value=projectType)
+                input(type='hidden')
+                if ( !cip )
+                  if ( nextPayment.type == 'quotas' )
+                    button(type='submit' name='currency' value='USD' style='white-space: nowrap;').btn.btn-primary.mb-2.mr-2 Solicitar CIP en Dolares
+                  button(type='submit' name='currency' value='PEN' style='white-space: nowrap;').btn.btn-primary.mb-2 Solicitar CIP en Soles
+                else
+                  .btn.btn-primary(data-toggle="modal" data-target="#CipModal") Ver CIP
+
+        hr.space.xs
+        .col-md-12
+        - let lastIsLote = lastPaid.type == 'quotas'
+          .row.m-0
+            h4.text-color: strong Últim#{ lastIsLote ? 'a letra' : 'o pago' } realizado
+          if ( lastPaid )
+            .row.m-0.justify-content-between.border-bot: .col-md-12
+              .row: h4.text-color
+                strong Fecha: #{ lastPaid.formattedExpiresAt || 'No hay fecha de pago previa' }
+              .row.d-flex.justify-content-between
+                h4.mr-auto.text-color #{ lastPaid ? 'Código' : 'Nombre' }:
+                  strong #{ lastPaid ? lastPaid.code : lastPaid.name }
+                h3 #{ lastPaid ? lastPaid.formattedAmount : lastPaid.formattedAmountPaid }
+          else
+            .row.m-0: .col-12.text-center
+              h4.text-color Aún se no ha realizado un pago
+
+    if (user.profile.document == '45528449' || user.profile.document == '47083976')
+      if (cip)
+        //- MODAL
+        #CipModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='CipModalLabel' aria-hidden='true' data-backdrop="static" data-keyboard="false")
+          .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content.py-3
+              .modal-header.justify-content-center.pb-0(style='border:none')
+                h5#CipModalLabel.modal-title.text-bold.pb-0.text-primary Datos de CIP
+              .modal-body
+                .row.justify-content-center
+                  .col-8.text-center
+                    .row.my-2
+                      .col-md-6 CIP:
+                      .col-md-6 #{ cip.cip }
+                    .row.my-2
+                      .col-md-6 Total a pagar:
+                      .col-md-6 #{ cip.payAmount }
+                    .row.my-2
+                      .col-md-6 Cantidad de letras a pagar:
+                      .col-md-6 #{ cip.quantity }
+                    .row.my-2
+                      .col-md-6 Tipo de cambio:
+                      .col-md-6 #{ cip.exchangeRate }
+                    .row.my-2
+                      .col-md-6 Moneda:
+                      .col-md-6 #{ cip.paymentIn }
+                .row.justify-content-center.flex-wrap
+                  a.btn.btn-primary.m-2(href='javascript:void(0)' data-dismiss="modal") Cerrar

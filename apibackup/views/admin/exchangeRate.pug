@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    .container-fluid
+      .row: .col-12: .card: .card-body
+        .row.border-bottom.mb-3
+          .col.text-center
+            h3 Cambiar tipo de cambio CIP
+        - console.log(exchangeRate)
+        form(action='/admin/tipo-cambio', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group.row
+            label.d-none.d-md-block.col-md-3.col-form-label.font-weight-bold.text-right(for='value') Tipo de cambio
+            label.d-block.d-md-none.col-md-3.col-form-label.font-weight-bold.text-left(for='value') Tipo de cambio
+            .col-md-7
+              input.form-control(type='number', name='value', id='value', step='.0001', value=exchangeRate.value, required)
+          .form-group.row
+            .col-md-3
+            .col-md-7.text-end
+                button.btn.btn-primary(type='submit')
+                  i.fas.fa-pencil-alt.fa-sm.mr-1
+                  | Actualizar
