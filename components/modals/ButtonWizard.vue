@@ -1,5 +1,5 @@
 <template>
-    <div class="option">
+    <div class="option mx-2">
         <input class="float-right" type="radio" name="newDocument" :id="value" ref="value" @click="handleOptionSelect">
         <div class="content-button d-flex flex-column align-items-center mt-4" @click="handleOptionSelect">
             <img :src="img" alt="Solicitud" />

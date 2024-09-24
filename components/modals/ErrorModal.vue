@@ -1,7 +1,7 @@
 <template>
 	<div class="container-success">
-		<img src="~assets/img/modals/exclamacion.png" class="w-25" alt="Señal aprobada" />
-		<p>
+		<img src="~assets/img/modals/exclamacion.png" alt="Señal aprobada" />
+		<p class="mt-4">
 			Hemos identificado que todavía no es apto para recibir la minuta. Esto se debe a una de las siguientes
 			razones:
 		</p>
@@ -16,12 +16,16 @@
 	</div>
 </template>
 <script>
-	export default {};
+export default {};
 </script>
 <style scoped>
-	.container-success {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
+.container-success {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+img {
+	width: 60px !important;
+}
 </style>
