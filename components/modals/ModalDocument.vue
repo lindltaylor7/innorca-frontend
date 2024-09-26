@@ -9,10 +9,10 @@
 		:hide-header="true"
 		aria-hidden="true">
 		<div class="row">
-			<div class="col-4">
+			<div class="col-3">
 				<Circles :circlesSelected="circlesSelected" />
 			</div>
-			<div class="col-8">
+			<div class="col-9">
 				<component
 					:is="getComponentMain"
 					@nextModal="nextModal"

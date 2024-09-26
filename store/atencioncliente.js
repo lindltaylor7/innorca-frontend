@@ -90,14 +90,14 @@ export const actions = {
         formData.append('fileName', obj.payload.fileName);
         formData.append('file', obj.payload.file);
 
-        return await axios.post(`${process.env.API_URL}/consulta/${obj.payload.id}`, formData, { headers: { 'Content-Type': 'multipart/form-data', "x-access-token" : obj.token } })
+       /*  return await axios.post(`${process.env.API_URL}/consulta/${obj.payload.id}`, formData, { headers: { 'Content-Type': 'multipart/form-data', "x-access-token" : obj.token } })
             .then( ({ data }) => {
                 //console.log('creaeRequest', data);
                 return data;
             })
             .catch(e => {
 
-            });
+            }); */
     },
     async fetchTicketOptions({ commit }, obj) {
 

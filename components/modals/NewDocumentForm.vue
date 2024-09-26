@@ -10,7 +10,9 @@
 			<div class="row">
 				<div class="col-6">
 					<div class="mb-1">
-						<select name="categoryAttention" id="categoryAttention"
+						<select
+							name="categoryAttention"
+							id="categoryAttention"
 							v-model="newRequestDocument.categoryAttention">
 							<option value="1">Trámite de minuta</option>
 						</select>
@@ -43,26 +45,40 @@
 
 			<button type="button" class="btn btn-green float-left mt-2" @click="handleNextButton">Validación</button>
 		</template>
+		<Loader
+			v-if="showLoader"
+			:title="'!Felicitaciones!'"
+			:subtitle="'Ya puedes iniciar tu trámite de minuta'"
+			@nextModal="nextModal" />
 	</div>
 </template>
 <script>
-export default {
-	data() {
-		return {
-			newRequestDocument: {
-				categoryAttention: 0,
-				nameProject: '',
-				email: '',
-				contractNumber: '',
-				cellphone: '',
-			},
-		};
-	},
-	methods: {
-		handleNextButton() {
-			this.$emit('nextModal', 2);
+	import Loader from './Loader.vue';
+
+	export default {
+		components: { Loader },
+		data() {
+			return {
+				newRequestDocument: {
+					categoryAttention: 0,
+					nameProject: '',
+					email: '',
+					contractNumber: '',
+					cellphone: '',
+				},
+				showLoader: false,
+			};
 		},
-	},
-};
+		methods: {
+			handleNextButton() {
+				//this.$emit('nextModal', 2);
+				this.showLoader = true;
+			},
+			nextModal() {
+				this.showLoader = false;
+				this.$emit('nextModal', 4);
+			},
+		},
+	};
 </script>
 <style lang=""></style>

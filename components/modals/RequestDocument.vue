@@ -4,7 +4,7 @@
 		<p class="mb-0">Seleccione el titular</p>
 		<div class="row">
 			<template v-for="customer in customers">
-				<div class="col-6">
+				<div class="col-4">
 					<ButtonWizard
 						:title="customer.name"
 						:img="require('~/assets/img/user-male.png')"

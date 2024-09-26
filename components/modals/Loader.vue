@@ -3,12 +3,19 @@
 		<div class="loader-big" v-if="visible"></div>
 		<div class="validated" v-else @click="handleNextButton">
 			<img src="~assets/img/modals/senal-aprobada.png" alt="Señal aproabada" />
-			<h5 class="modal-title">Validado</h5>
+			<h5 class="modal-title">{{ title }}</h5>
+			<p>{{ subtitle }}</p>
+			<!-- <button class="btn btn-green float-left mt-2" @click="handleNextButton">Iniciar</button>
+			<button class="btn btn-red float-left mt-2" @click="handleNextButton">Error</button> -->
 		</div>
 	</div>
 </template>
 <script>
 	export default {
+		props: {
+			title: String,
+			subtitle: String,
+		},
 		data() {
 			return {
 				visible: true,
@@ -35,7 +42,7 @@
 		position: absolute;
 		width: 600px;
 		top: 25%;
-		left: -45%;
+		left: -5%;
 	}
 
 	img {

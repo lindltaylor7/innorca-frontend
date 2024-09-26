@@ -224,7 +224,7 @@
 				</div>
 			</div>
 		</div>
-		<Loader v-if="showLoader" @nextModal="nextModal" />
+		<Loader v-if="showLoader" @nextModal="nextModal" :title="'!Validado!'" :subtitle="''" />
 		<hr />
 		<button class="btn btn-warning">Guardar</button>
 		<button class="btn btn-green" @click="loader">Enviar Solicitud</button>
