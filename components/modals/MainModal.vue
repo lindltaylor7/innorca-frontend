@@ -29,7 +29,7 @@
 					:title="'Consulta'"
 					:value="3" />
 			</div>
-
+			<hr />
 			<!-- Next Button -->
 			<button type="button" class="btn btn-green float-left mt-2" @click="handleNextButton">Siguiente →</button>
 		</template>

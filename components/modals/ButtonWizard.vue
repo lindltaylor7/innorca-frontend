@@ -36,7 +36,7 @@
 	.option {
 		height: 10em;
 		width: 100%;
-		border: 1px solid green;
+		border: 1px solid #158a2f;
 		border-radius: 10px;
 	}
 
@@ -44,7 +44,7 @@
 		width: 20px;
 		height: 20px;
 		margin: 5px 3px 0px 0px;
-		accent-color: green;
+		accent-color: #158a2f;
 	}
 
 	span {

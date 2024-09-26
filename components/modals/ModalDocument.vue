@@ -1,7 +1,7 @@
 <template>
 	<b-modal
 		id="modal_sac"
-		size="xl"
+		size="lg"
 		centered
 		class="modal fade"
 		tabindex="-1"
@@ -10,12 +10,7 @@
 		aria-hidden="true">
 		<div class="row">
 			<div class="col-4">
-				{{ statusClient }}
-				<div class="circles-advance w-100">
-					<div class="circle">1</div>
-					<div class="circle">2</div>
-					<div class="circle">3</div>
-				</div>
+				<Circles :circlesSelected="circlesSelected" />
 			</div>
 			<div class="col-8">
 				<component
@@ -36,6 +31,7 @@
 	import RequestDocument from '../../components/modals/RequestDocument.vue';
 	import RequiredDocuments from '../../components/modals/RequireDocuments.vue';
 	import ProgressBar from '../../components/modals/ProgressBar.vue';
+	import Circles from './Circles.vue';
 
 	export default {
 		components: {
@@ -46,6 +42,7 @@
 			RequestDocument,
 			RequiredDocuments,
 			ProgressBar,
+			Circles,
 		},
 		data() {
 			return {
@@ -53,6 +50,7 @@
 				activeForm: true,
 				indexComponent: 0,
 				statusClient: 0,
+				circlesSelected: 1,
 			};
 		},
 		methods: {
@@ -77,8 +75,10 @@
 					case 0:
 						return 'MainModal';
 					case 1:
+						this.circlesSelected = 2;
 						return 'NewDocumentForm';
 					case 2:
+						this.circlesSelected = 3;
 						return 'SuccessMessage';
 					case 3:
 						return 'ErrorModal';
@@ -95,20 +95,3 @@
 		},
 	};
 </script>
-<style scoped>
-	.circle {
-		background-color: green !important;
-		width: 50px;
-		height: 50px;
-		margin: 20px 0px 20px 0px;
-		color: #fff;
-	}
-
-	.circles-advance {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		margin-top: 20%;
-	}
-</style>

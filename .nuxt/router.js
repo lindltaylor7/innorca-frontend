@@ -16,7 +16,6 @@ const _a06e2564 = () => interopDefault(import('..\\pages\\noticias\\index.vue' /
 const _5da5dfea = () => interopDefault(import('..\\pages\\preguntas-frecuentes\\index.vue' /* webpackChunkName: "pages/preguntas-frecuentes/index" */))
 const _26d5bff2 = () => interopDefault(import('..\\pages\\recuperar-contrasena\\index.vue' /* webpackChunkName: "pages/recuperar-contrasena/index" */))
 const _624b5af8 = () => interopDefault(import('..\\pages\\signup\\index.vue' /* webpackChunkName: "pages/signup/index" */))
-const _70d4298f = () => interopDefault(import('..\\pages\\atencion-al-cliente\\modal.vue' /* webpackChunkName: "pages/atencion-al-cliente/modal" */))
 const _40b4c21b = () => interopDefault(import('..\\pages\\construcciones\\nueva-cotizacion\\index.vue' /* webpackChunkName: "pages/construcciones/nueva-cotizacion/index" */))
 const _11d0c7c3 = () => interopDefault(import('..\\pages\\mi-perfil\\cambio-contrasena.vue' /* webpackChunkName: "pages/mi-perfil/cambio-contrasena" */))
 const _e828fb9e = () => interopDefault(import('..\\pages\\atencion-al-cliente\\detalle\\_id.vue' /* webpackChunkName: "pages/atencion-al-cliente/detalle/_id" */))
@@ -85,10 +84,6 @@ export const routerOptions = {
     path: "/signup",
     component: _624b5af8,
     name: "signup"
-  }, {
-    path: "/atencion-al-cliente/modal",
-    component: _70d4298f,
-    name: "atencion-al-cliente-modal"
   }, {
     path: "/construcciones/nueva-cotizacion",
     component: _40b4c21b,

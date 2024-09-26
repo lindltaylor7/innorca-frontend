@@ -72,12 +72,6 @@
     "chunkName": "pages/signup/index"
   },
   {
-    "name": "atencion-al-cliente-modal",
-    "path": "/atencion-al-cliente/modal",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\atencion-al-cliente\\\\modal.vue",
-    "chunkName": "pages/atencion-al-cliente/modal"
-  },
-  {
     "name": "construcciones-nueva-cotizacion",
     "path": "/construcciones/nueva-cotizacion",
     "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\construcciones\\\\nueva-cotizacion\\\\index.vue",
