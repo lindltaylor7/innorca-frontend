@@ -2,121 +2,141 @@
   {
     "name": "atencion-al-cliente",
     "path": "/atencion-al-cliente",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\atencion-al-cliente\\\\index.vue",
-    "chunkName": "pages/atencion-al-cliente/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\atencion-al-cliente\\\\index.vue",
+    "chunkName": "pages/atencion-al-cliente/index",
+    "_name": "_219f5a64"
   },
   {
     "name": "construcciones",
     "path": "/construcciones",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\construcciones\\\\index.vue",
-    "chunkName": "pages/construcciones/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\construcciones\\\\index.vue",
+    "chunkName": "pages/construcciones/index",
+    "_name": "_130a9cbc"
   },
   {
     "name": "inicio",
     "path": "/inicio",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\inicio\\\\index.vue",
-    "chunkName": "pages/inicio/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\inicio\\\\index.vue",
+    "chunkName": "pages/inicio/index",
+    "_name": "_863e3032"
   },
   {
     "name": "login",
     "path": "/login",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\login\\\\index.vue",
-    "chunkName": "pages/login/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\login\\\\index.vue",
+    "chunkName": "pages/login/index",
+    "_name": "_1f6ae31f"
   },
   {
     "name": "mi-perfil",
     "path": "/mi-perfil",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\mi-perfil\\\\index.vue",
-    "chunkName": "pages/mi-perfil/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mi-perfil\\\\index.vue",
+    "chunkName": "pages/mi-perfil/index",
+    "_name": "_62656beb"
   },
   {
     "name": "mis-inmuebles",
     "path": "/mis-inmuebles",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\mis-inmuebles\\\\index.vue",
-    "chunkName": "pages/mis-inmuebles/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mis-inmuebles\\\\index.vue",
+    "chunkName": "pages/mis-inmuebles/index",
+    "_name": "_57a4b8ee"
   },
   {
     "name": "mis-pagos",
     "path": "/mis-pagos",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\mis-pagos\\\\index.vue",
-    "chunkName": "pages/mis-pagos/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mis-pagos\\\\index.vue",
+    "chunkName": "pages/mis-pagos/index",
+    "_name": "_6e5216a4"
   },
   {
     "name": "mis-referidos",
     "path": "/mis-referidos",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\mis-referidos\\\\index.vue",
-    "chunkName": "pages/mis-referidos/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mis-referidos\\\\index.vue",
+    "chunkName": "pages/mis-referidos/index",
+    "_name": "_0254e3bf"
   },
   {
     "name": "noticias",
     "path": "/noticias",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\noticias\\\\index.vue",
-    "chunkName": "pages/noticias/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\noticias\\\\index.vue",
+    "chunkName": "pages/noticias/index",
+    "_name": "_df34a3c4"
   },
   {
     "name": "preguntas-frecuentes",
     "path": "/preguntas-frecuentes",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\preguntas-frecuentes\\\\index.vue",
-    "chunkName": "pages/preguntas-frecuentes/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\preguntas-frecuentes\\\\index.vue",
+    "chunkName": "pages/preguntas-frecuentes/index",
+    "_name": "_4397e8ba"
   },
   {
     "name": "recuperar-contrasena",
     "path": "/recuperar-contrasena",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\recuperar-contrasena\\\\index.vue",
-    "chunkName": "pages/recuperar-contrasena/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\recuperar-contrasena\\\\index.vue",
+    "chunkName": "pages/recuperar-contrasena/index",
+    "_name": "_0cc7c8c2"
   },
   {
     "name": "signup",
     "path": "/signup",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\signup\\\\index.vue",
-    "chunkName": "pages/signup/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\signup\\\\index.vue",
+    "chunkName": "pages/signup/index",
+    "_name": "_9b5df158"
   },
   {
     "name": "construcciones-nueva-cotizacion",
     "path": "/construcciones/nueva-cotizacion",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\construcciones\\\\nueva-cotizacion\\\\index.vue",
-    "chunkName": "pages/construcciones/nueva-cotizacion/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\construcciones\\\\nueva-cotizacion\\\\index.vue",
+    "chunkName": "pages/construcciones/nueva-cotizacion/index",
+    "_name": "_a35fda2a"
   },
   {
     "name": "mi-perfil-cambio-contrasena",
     "path": "/mi-perfil/cambio-contrasena",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\mi-perfil\\\\cambio-contrasena.vue",
-    "chunkName": "pages/mi-perfil/cambio-contrasena"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\mi-perfil\\\\cambio-contrasena.vue",
+    "chunkName": "pages/mi-perfil/cambio-contrasena",
+    "_name": "_2bc04e1a"
   },
   {
     "name": "atencion-al-cliente-detalle-id",
     "path": "/atencion-al-cliente/detalle/:id?",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\atencion-al-cliente\\\\detalle\\\\_id.vue",
-    "chunkName": "pages/atencion-al-cliente/detalle/_id"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\atencion-al-cliente\\\\detalle\\\\_id.vue",
+    "chunkName": "pages/atencion-al-cliente/detalle/_id",
+    "_name": "_3d70a1fe"
   },
   {
     "name": "construcciones-cotizacion-id",
     "path": "/construcciones/cotizacion/:id?",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\construcciones\\\\cotizacion\\\\_id.vue",
-    "chunkName": "pages/construcciones/cotizacion/_id"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\construcciones\\\\cotizacion\\\\_id.vue",
+    "chunkName": "pages/construcciones/cotizacion/_id",
+    "_name": "_2c1a3292"
   },
   {
     "name": "noticias-post-id",
     "path": "/noticias/post/:id?",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\noticias\\\\post\\\\_id.vue",
-    "chunkName": "pages/noticias/post/_id"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\noticias\\\\post\\\\_id.vue",
+    "chunkName": "pages/noticias/post/_id",
+    "_name": "_bf4d2e34"
   },
   {
     "name": "recuperar-contrasena-generar-id",
     "path": "/recuperar-contrasena/generar/:id",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\recuperar-contrasena\\\\generar\\\\_id.vue",
-    "chunkName": "pages/recuperar-contrasena/generar/_id"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\recuperar-contrasena\\\\generar\\\\_id.vue",
+    "chunkName": "pages/recuperar-contrasena/generar/_id",
+    "_name": "_7a943568"
   },
   {
     "name": "completar-registro-id",
     "path": "/completar-registro/:id?",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\completar-registro\\\\_id.vue",
-    "chunkName": "pages/completar-registro/_id"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\completar-registro\\\\_id.vue",
+    "chunkName": "pages/completar-registro/_id",
+    "_name": "_26e94311"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\Usuario\\\\Desktop\\\\innorca\\\\innorca-frontend\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "component": "C:\\\\Users\\\\Jair\\\\Downloads\\\\PROYECTO-MENORCA\\\\MENORCA\\\\web-completa\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_06fc54ec"
   }
 ]
